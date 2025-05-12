@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SudokuBoard from "./SudokuBoard";
 import GameControls from "./GameControls";
+import DifficultySelector from "./DifficultySelector";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 
 const SudokuGame = () => {
@@ -77,6 +78,13 @@ const SudokuGame = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+      <div className="mb-6">
+        <DifficultySelector
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
+        />
+      </div>
+
       <SudokuBoard
         board={board}
         selectedCell={selectedCell}
