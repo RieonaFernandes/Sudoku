@@ -6,7 +6,7 @@ const GameControls = ({ onNewGame }) => {
     <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
       <button
         onClick={onNewGame}
-        className="px-6 py-3 bg-yellow-600 text-white rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="px-6 py-3 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         aria-label="Start new game"
       >
         New Game
