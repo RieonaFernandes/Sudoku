@@ -32,18 +32,27 @@ const SudokuCell = ({
     <button
       className={`
         aspect-square flex items-center justify-center 
-        text-xl sm:text-2xl font-medium transition-colors
-        focus:outline-none focus:ring-2 focus:ring-blue-400
+        text-lg font-medium transition-colors
+        border border-amber-200 focus:outline-none
         ${className}
         ${
           isFixed
-            ? "text-gray-800 bg-gray-50 font-bold cursor-not-allowed"
-            : "text-blue-600 bg-white hover:bg-blue-50 cursor-pointer"
+            ? "text-amber-800 bg-amber-50 font-semibold cursor-default"
+            : "text-amber-900 bg-white hover:bg-amber-100 cursor-pointer"
         }
-        ${isSelected ? "!bg-blue-200" : ""}
-        ${isConflict ? "!bg-red-200" : ""}
-        ${(row + 1) % 3 === 0 ? "border-b-4 border-gray-300" : ""}
-        ${(col + 1) % 3 === 0 ? "border-r-4 border-gray-300" : ""}
+        ${isSelected ? "bg-amber-100 shadow-inner" : ""}
+        ${isConflict ? "text-red-500 bg-red-100" : ""}
+        ${
+          (row + 1) % 3 === 0 && row !== 8
+            ? "border-b-2 border-amber-300"
+            : "border-b border-amber-200"
+        }
+        ${
+          (col + 1) % 3 === 0 && col !== 8
+            ? "border-r-2 border-amber-300"
+            : "border-r border-amber-200"
+        }
+        focus:ring-2 focus:ring-amber-400
       `}
       onClick={() => !isFixed && onClick()}
       aria-label={`Cell at row ${row + 1}, column ${col + 1}. ${

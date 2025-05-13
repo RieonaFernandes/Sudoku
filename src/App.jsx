@@ -1,17 +1,17 @@
 import SudokuGame from "./components/SudokuGame";
+import title from "../public/title.png";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-      <header className="bg-white shadow-sm">
-        <nav className="max-w-7xl mx-auto px-4 py-4">
-          <h1 className="text-3xl font-bold text-gray-800 text-center">
-            Sudoku
-          </h1>
-        </nav>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 home-background">
+      <div className="py-4 flex flex-col items-center justify-center">
+        <img
+          src={title}
+          alt="title"
+          className="w-30 sm:w-32 md:w-34 lg:w-36 h-20 sm:h-22 md:h-24 lg:h-26"
+        />
+      </div>
+      <main className="mx-auto">
         <div className="flex flex-col items-center justify-center">
           <SudokuGame />
         </div>

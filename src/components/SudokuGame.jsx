@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import SudokuBoard from "./SudokuBoard";
 import GameControls from "./GameControls";
-import DifficultySelector from "./DifficultySelector";
 import GameWonModal from "./GameWonModal";
 import Timer from "./Timer";
 import StartModal from "./StartModal";
@@ -113,7 +112,7 @@ const SudokuGame = () => {
   }, [selectedCell]);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <div className="min-h-screen py-15 pb-4 sm:pb-8 flex items-start justify-center">
       {showStartModal && (
         <StartModal
           onStart={(selectedDifficulty) => {
@@ -125,66 +124,84 @@ const SudokuGame = () => {
       )}
 
       {gameStarted && (
-        <>
-          <div className="flex items-center justify-center text-sm font-medium text-gray-700 gap-6">
-            Mode: {difficulty}
-          </div>
-
-          <div className="mb-6">
+        <div className="max-w-6xl w-full bg-white rounded-2xl p-6 shadow-waffle">
+          {/* Header Section */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-amber-600 rounded-lg grid grid-cols-2 gap-1 p-1">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="bg-amber-100 rounded-sm" />
+                ))}
+              </div>
+              <span className="text-sm font-medium text-amber-600">
+                {difficulty.toUpperCase()}
+              </span>
+            </div>
             <Timer seconds={secondsElapsed} />
           </div>
-          <SudokuBoard
-            board={board}
-            selectedCell={selectedCell}
-            conflicts={conflicts}
-            onCellSelect={handleCellSelect}
-          />
-          {/* Number input pad */}
-          <div className="mt-6 grid grid-cols-5 gap-2 max-w-xs mx-auto">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-              <button
-                key={num}
-                onClick={() => handleNumberInput(num)}
-                className="aspect-square bg-blue-100 rounded hover:bg-blue-200 
-                     transition-colors font-medium text-lg"
-              >
-                {num}
-              </button>
-            ))}
+          {/* Main Content Area */}
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Sudoku Board - Left Side */}
+            <div className="flex-1">
+              <SudokuBoard
+                board={board}
+                selectedCell={selectedCell}
+                conflicts={conflicts}
+                onCellSelect={handleCellSelect}
+              />
+            </div>
+            {/* Controls - Right Side */}
+            <div className="flex flex-col items-center lg:w-80 gap-6">
+              {/* Number input pad */}
+              <div className="grid grid-cols-5 gap-2 w-full">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                  <button
+                    key={num}
+                    onClick={() => handleNumberInput(num)}
+                    className="aspect-square bg-amber-50 rounded-lg hover:bg-amber-100 
+                            transition-colors font-medium text-amber-900
+                            border border-amber-200 hover:border-amber-300
+                            focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  >
+                    {num}
+                  </button>
+                ))}
 
-            <button
-              onClick={() => handleNumberInput(0)}
-              className="col-span-1 bg-red-100 rounded hover:bg-red-200
-          transition-colors flex items-center justify-center"
-              aria-label="Clear cell"
-            >
-              <BackspaceIcon />
-            </button>
+                <button
+                  onClick={() => handleNumberInput(0)}
+                  className="col-span-1 bg-amber-50 rounded-lg hover:bg-amber-100
+                        flex items-center justify-center border border-amber-200
+                        hover:border-amber-300 transition-colors"
+                  aria-label="Clear cell"
+                >
+                  <BackspaceIcon className="w-5 h-5 text-amber-600" />
+                </button>
+              </div>
+
+              {/* Game Controls */}
+              <GameControls
+                onNewGame={() => setShowConfirmation(true)}
+                className="w-full"
+              />
+            </div>
+            {/* Add confirmation modal rendering */}
+            {showConfirmation && (
+              <ConfirmationModal
+                onConfirm={() => {
+                  window.location.reload(false);
+                }}
+                onCancel={() => setShowConfirmation(false)}
+              />
+            )}
+            {gameWon && (
+              <GameWonModal
+                onClose={() => setGameWon(false)}
+                onNewGame={() => window.location.reload(false)}
+                time={secondsElapsed}
+              />
+            )}
           </div>
-          <GameControls
-            // onNewGame={() => initializeGame()}
-            onNewGame={() => setShowConfirmation(true)}
-            // onCheckSolution={() => {
-            //   if (validateSolution(board)) setGameWon(true);
-            //   else alert("Solution contains errors!");
-            // }}
-          />
-          {/* Add confirmation modal rendering */}
-          {showConfirmation && (
-            <ConfirmationModal
-              onConfirm={() => {
-                window.location.reload(false);
-              }}
-              onCancel={() => setShowConfirmation(false)}
-            />
-          )}
-          {gameWon && (
-            <GameWonModal
-              onClose={() => setGameWon(false)}
-              onNewGame={() => window.location.reload(false)}
-            />
-          )}
-        </>
+        </div>
       )}
     </div>
   );
