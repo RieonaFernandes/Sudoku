@@ -5,6 +5,10 @@ import DifficultySelector from "./DifficultySelector";
 const StartModal = ({ onStart }) => {
   const [difficulty, setDifficulty] = useState("medium");
 
+  const handleStart = () => {
+    onStart(difficulty);
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl animate-pop-in">
@@ -21,7 +25,7 @@ const StartModal = ({ onStart }) => {
           </div>
 
           <button
-            onClick={() => onStart(difficulty)}
+            onClick={() => handleStart(difficulty)}
             className="px-6 py-3 bg-green-500 text-white rounded-lg
                      hover:bg-green-600 transition-colors text-lg font-medium
                      w-full"

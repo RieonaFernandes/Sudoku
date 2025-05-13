@@ -5,6 +5,7 @@ import DifficultySelector from "./DifficultySelector";
 import GameWonModal from "./GameWonModal";
 import Timer from "./Timer";
 import StartModal from "./StartModal";
+import ConfirmationModal from "./ConfirmationModal";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
@@ -20,13 +21,14 @@ const SudokuGame = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [showStartModal, setShowStartModal] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   // Initialize game on mount and difficulty change
   useEffect(() => {
     if (gameStarted) {
       initializeGame(difficulty);
     }
-  }, [difficulty]);
+  }, [gameStarted]);
 
   // Track timer
   useEffect(() => {
@@ -46,7 +48,7 @@ const SudokuGame = () => {
     setConflicts([]);
     setGameWon(false);
     setSecondsElapsed(0);
-    setDifficulty(selectedDifficulty);
+    // setDifficulty(selectedDifficulty);
     setIsTimerRunning(true);
     setGameStarted(true);
   };
@@ -114,32 +116,29 @@ const SudokuGame = () => {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
       {showStartModal && (
         <StartModal
-          onStart={(diff) => {
+          onStart={(selectedDifficulty) => {
+            setDifficulty(selectedDifficulty);
             setShowStartModal(false);
-            initializeGame(diff);
+            initializeGame(selectedDifficulty);
           }}
         />
       )}
 
       {gameStarted && (
         <>
-          <div className="mb-6 flex items-center justify-center">
-            <DifficultySelector
-              difficulty={difficulty}
-              setDifficulty={setDifficulty}
-            />
+          <div className="flex items-center justify-center text-sm font-medium text-gray-700 gap-6">
+            Mode: {difficulty}
           </div>
+
           <div className="mb-6">
             <Timer seconds={secondsElapsed} />
           </div>
-
           <SudokuBoard
             board={board}
             selectedCell={selectedCell}
             conflicts={conflicts}
             onCellSelect={handleCellSelect}
           />
-
           {/* Number input pad */}
           <div className="mt-6 grid grid-cols-5 gap-2 max-w-xs mx-auto">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
@@ -162,19 +161,27 @@ const SudokuGame = () => {
               <BackspaceIcon />
             </button>
           </div>
-
           <GameControls
-            onNewGame={() => initializeGame()}
+            // onNewGame={() => initializeGame()}
+            onNewGame={() => setShowConfirmation(true)}
             // onCheckSolution={() => {
             //   if (validateSolution(board)) setGameWon(true);
             //   else alert("Solution contains errors!");
             // }}
           />
-
+          {/* Add confirmation modal rendering */}
+          {showConfirmation && (
+            <ConfirmationModal
+              onConfirm={() => {
+                window.location.reload(false);
+              }}
+              onCancel={() => setShowConfirmation(false)}
+            />
+          )}
           {gameWon && (
             <GameWonModal
               onClose={() => setGameWon(false)}
-              onNewGame={() => initializeGame()}
+              onNewGame={() => window.location.reload(false)}
             />
           )}
         </>
