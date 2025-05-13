@@ -4,6 +4,7 @@ import GameControls from "./GameControls";
 import DifficultySelector from "./DifficultySelector";
 import GameWonModal from "./GameWonModal";
 import Timer from "./Timer";
+import StartModal from "./StartModal";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
@@ -17,10 +18,14 @@ const SudokuGame = () => {
   const [difficulty, setDifficulty] = useState("medium");
   const [secondsElapsed, setSecondsElapsed] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(true);
+  const [showStartModal, setShowStartModal] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
 
   // Initialize game on mount and difficulty change
   useEffect(() => {
-    initializeGame(difficulty);
+    if (gameStarted) {
+      initializeGame(difficulty);
+    }
   }, [difficulty]);
 
   // Track timer
@@ -34,14 +39,16 @@ const SudokuGame = () => {
     return () => clearInterval(interval);
   }, [isTimerRunning]);
 
-  const initializeGame = (selectedDifficulty = difficulty) => {
+  const initializeGame = (selectedDifficulty) => {
     const newPuzzle = generateNewPuzzle(selectedDifficulty);
     setBoard(newPuzzle);
     setSelectedCell(null);
     setConflicts([]);
     setGameWon(false);
     setSecondsElapsed(0);
+    setDifficulty(selectedDifficulty);
     setIsTimerRunning(true);
+    setGameStarted(true);
   };
 
   // Handle cell selection
@@ -105,57 +112,72 @@ const SudokuGame = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg">
-      <div className="mb-6">
-        <DifficultySelector
-          difficulty={difficulty}
-          setDifficulty={setDifficulty}
+      {showStartModal && (
+        <StartModal
+          onStart={(diff) => {
+            setShowStartModal(false);
+            initializeGame(diff);
+          }}
         />
-        <Timer seconds={secondsElapsed} />
-      </div>
+      )}
 
-      <SudokuBoard
-        board={board}
-        selectedCell={selectedCell}
-        conflicts={conflicts}
-        onCellSelect={handleCellSelect}
-      />
+      {gameStarted && (
+        <>
+          <div className="mb-6 flex items-center justify-center">
+            <DifficultySelector
+              difficulty={difficulty}
+              setDifficulty={setDifficulty}
+            />
+          </div>
+          <div className="mb-6">
+            <Timer seconds={secondsElapsed} />
+          </div>
 
-      {/* Number input pad */}
-      <div className="mt-6 grid grid-cols-5 gap-2 max-w-xs mx-auto">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <button
-            key={num}
-            onClick={() => handleNumberInput(num)}
-            className="aspect-square bg-blue-100 rounded hover:bg-blue-200 
+          <SudokuBoard
+            board={board}
+            selectedCell={selectedCell}
+            conflicts={conflicts}
+            onCellSelect={handleCellSelect}
+          />
+
+          {/* Number input pad */}
+          <div className="mt-6 grid grid-cols-5 gap-2 max-w-xs mx-auto">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <button
+                key={num}
+                onClick={() => handleNumberInput(num)}
+                className="aspect-square bg-blue-100 rounded hover:bg-blue-200 
                      transition-colors font-medium text-lg"
-          >
-            {num}
-          </button>
-        ))}
+              >
+                {num}
+              </button>
+            ))}
 
-        <button
-          onClick={() => handleNumberInput(0)}
-          className="col-span-1 bg-red-100 rounded hover:bg-red-200
+            <button
+              onClick={() => handleNumberInput(0)}
+              className="col-span-1 bg-red-100 rounded hover:bg-red-200
           transition-colors flex items-center justify-center"
-          aria-label="Clear cell"
-        >
-          <BackspaceIcon />
-        </button>
-      </div>
+              aria-label="Clear cell"
+            >
+              <BackspaceIcon />
+            </button>
+          </div>
 
-      <GameControls
-        onNewGame={() => initializeGame()}
-        // onCheckSolution={() => {
-        //   if (validateSolution(board)) setGameWon(true);
-        //   else alert("Solution contains errors!");
-        // }}
-      />
+          <GameControls
+            onNewGame={() => initializeGame()}
+            // onCheckSolution={() => {
+            //   if (validateSolution(board)) setGameWon(true);
+            //   else alert("Solution contains errors!");
+            // }}
+          />
 
-      {gameWon && (
-        <GameWonModal
-          onClose={() => setGameWon(false)}
-          onNewGame={() => initializeGame()}
-        />
+          {gameWon && (
+            <GameWonModal
+              onClose={() => setGameWon(false)}
+              onNewGame={() => initializeGame()}
+            />
+          )}
+        </>
       )}
     </div>
   );

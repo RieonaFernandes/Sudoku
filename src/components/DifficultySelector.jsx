@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const DifficultySelector = ({ difficulty, setDifficulty }) => {
+const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
   const difficulties = [
     {
       id: "easy",
@@ -29,17 +29,15 @@ const DifficultySelector = ({ difficulty, setDifficulty }) => {
   ];
 
   return (
-    <div className="flex flex-col items-center space-y-2 mb-6">
-      <span className="text-sm font-medium text-gray-700 mb-2">
-        Difficulty:
-      </span>
+    <div className={`flex flex-col gap-2 ${className}`}>
+      {/* <span className="text-sm font-medium text-gray-700">Mode</span> */}
       <div className="flex gap-2">
         {difficulties.map(({ id, label, colorClasses }) => (
           <button
             key={id}
             onClick={() => setDifficulty(id)}
             className={`
-              px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
+              px-4 py-2 rounded-md text-sm font-medium transition-colors
               focus:outline-none focus:ring-2 focus:ring-offset-2
               border ${
                 difficulty === id ? "border-transparent" : "border-gray-300"
@@ -51,8 +49,8 @@ const DifficultySelector = ({ difficulty, setDifficulty }) => {
                   : `${colorClasses.unselected} bg-white`
               }
             `}
-            aria-label={`Select ${label} difficulty`}
-            aria-pressed={difficulty === id}
+            // aria-label={`Select ${label} difficulty`}
+            // aria-pressed={difficulty === id}
           >
             {label}
           </button>
@@ -63,8 +61,9 @@ const DifficultySelector = ({ difficulty, setDifficulty }) => {
 };
 
 DifficultySelector.propTypes = {
-  difficulty: PropTypes.oneOf(["easy", "medium", "hard"]).isRequired,
+  difficulty: PropTypes.string.isRequired,
   setDifficulty: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export default DifficultySelector;
