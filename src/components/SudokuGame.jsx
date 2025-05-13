@@ -3,6 +3,7 @@ import SudokuBoard from "./SudokuBoard";
 import GameControls from "./GameControls";
 import DifficultySelector from "./DifficultySelector";
 import GameWonModal from "./GameWonModal";
+import Timer from "./Timer";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
@@ -14,11 +15,24 @@ const SudokuGame = () => {
   const [conflicts, setConflicts] = useState([]);
   const [gameWon, setGameWon] = useState(false);
   const [difficulty, setDifficulty] = useState("medium");
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
 
   // Initialize game on mount and difficulty change
   useEffect(() => {
     initializeGame(difficulty);
   }, [difficulty]);
+
+  // Track timer
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setSecondsElapsed((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning]);
 
   const initializeGame = (selectedDifficulty = difficulty) => {
     const newPuzzle = generateNewPuzzle(selectedDifficulty);
@@ -26,6 +40,8 @@ const SudokuGame = () => {
     setSelectedCell(null);
     setConflicts([]);
     setGameWon(false);
+    setSecondsElapsed(0);
+    setIsTimerRunning(true);
   };
 
   // Handle cell selection
@@ -66,6 +82,7 @@ const SudokuGame = () => {
 
     if (isComplete && validateSolution(newBoard)) {
       setGameWon(true);
+      setIsTimerRunning(false);
     }
   };
 
@@ -93,6 +110,7 @@ const SudokuGame = () => {
           difficulty={difficulty}
           setDifficulty={setDifficulty}
         />
+        <Timer seconds={secondsElapsed} />
       </div>
 
       <SudokuBoard
@@ -127,10 +145,10 @@ const SudokuGame = () => {
 
       <GameControls
         onNewGame={() => initializeGame()}
-        onCheckSolution={() => {
-          if (validateSolution(board)) setGameWon(true);
-          else alert("Solution contains errors!");
-        }}
+        // onCheckSolution={() => {
+        //   if (validateSolution(board)) setGameWon(true);
+        //   else alert("Solution contains errors!");
+        // }}
       />
 
       {gameWon && (
