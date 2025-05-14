@@ -10,6 +10,7 @@ const SudokuCell = ({
   className,
   row,
   col,
+  showValue,
 }) => {
   // Handle keyboard accessibility
   useEffect(() => {
@@ -52,15 +53,18 @@ const SudokuCell = ({
             ? "border-r-2 border-amber-300"
             : "border-r border-amber-200"
         }
-        focus:ring-2 focus:ring-amber-400
+        focus:ring-2 focus:ring-amber-400 
+        ${!showValue ? "bg-stone-100 text-transparent" : ""}
       `}
       onClick={() => !isFixed && onClick()}
       aria-label={`Cell at row ${row + 1}, column ${col + 1}. ${
         value || "empty"
       }${isFixed ? ", fixed value" : ""}`}
-      disabled={isFixed}
+      disabled={isFixed || !showValue}
     >
-      {value !== 0 ? value : ""}
+      {/* {value !== 0 ? value : ""} */}
+      {/* {showValue ? (value !== 0 ? value : "") : ""} */}
+      {showValue ? (value !== 0 ? value : "") : "?"}
     </button>
   );
 };
@@ -74,6 +78,7 @@ SudokuCell.propTypes = {
   className: PropTypes.string,
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
+  showValue: PropTypes.bool,
 };
 
 export default SudokuCell;

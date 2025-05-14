@@ -1,6 +1,12 @@
 import SudokuCell from "./SudokuCell";
 
-const SudokuBoard = ({ board, selectedCell, onCellSelect, conflicts }) => {
+const SudokuBoard = ({
+  board,
+  selectedCell,
+  onCellSelect,
+  conflicts,
+  showValues,
+}) => {
   // Function to determine if a cell is in a conflict state
   const hasConflict = (row, col) => {
     return conflicts.some((coord) => coord.row === row && coord.col === col);
@@ -25,6 +31,7 @@ const SudokuBoard = ({ board, selectedCell, onCellSelect, conflicts }) => {
                 onClick={() => !cell.isFixed && onCellSelect(rowIdx, colIdx)}
                 row={rowIdx}
                 col={colIdx}
+                showValue={showValues}
               />
             );
           })

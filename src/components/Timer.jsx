@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { FaStopwatch } from "react-icons/fa6";
+import { FaStopwatch, FaPause, FaPlay } from "react-icons/fa6";
 
-const Timer = ({ seconds }) => {
+const Timer = ({ seconds, isPaused, onPause }) => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -11,14 +11,31 @@ const Timer = ({ seconds }) => {
   };
 
   return (
-    <div className="flex items-center justify-center text-md font-medium text-gray-700 gap-2">
-      <FaStopwatch /> {formatTime(seconds)}
-    </div>
+    <button
+      onClick={onPause}
+      className="flex items-center gap-2 px-3 py-1.5 bg-stone-100 rounded-lg
+               hover:bg-stone-200 transition-colors group focus:outline-none
+               focus:ring-2 focus:ring-stone-400"
+    >
+      <FaStopwatch className="text-stone-600" />
+      <span className="text-sm font-medium text-stone-600">
+        <span className="flex items-center gap-1">
+          {isPaused ? (
+            <FaPlay className="text-xs" />
+          ) : (
+            <FaPause className="text-xs" />
+          )}
+          {formatTime(seconds)}
+        </span>
+      </span>
+    </button>
   );
 };
 
 Timer.propTypes = {
   seconds: PropTypes.number.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  onPause: PropTypes.func.isRequired,
 };
 
 export default Timer;

@@ -25,6 +25,7 @@ const SudokuGame = () => {
   const [cluesUsed, setCluesUsed] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [isTimerPaused, setIsTimerPaused] = useState(false);
   const totalClues = 4;
   const totalMistakes = 3;
 
@@ -38,13 +39,13 @@ const SudokuGame = () => {
   // Track timer
   useEffect(() => {
     let interval;
-    if (isTimerRunning) {
+    if (isTimerRunning && !isTimerPaused) {
       interval = setInterval(() => {
         setSecondsElapsed((prev) => prev + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isTimerRunning]);
+  }, [isTimerRunning, isTimerPaused]);
 
   const initializeGame = (selectedDifficulty) => {
     const newPuzzle = generateNewPuzzle(selectedDifficulty);
@@ -148,6 +149,11 @@ const SudokuGame = () => {
     );
   };
 
+  const togglePause = () => {
+    setIsTimerPaused((prev) => !prev);
+    setSelectedCell(null);
+  };
+
   return (
     <div className="min-h-screen py-15 pb-4 sm:pb-8 flex items-start justify-center">
       {showStartModal && (
@@ -183,7 +189,11 @@ const SudokuGame = () => {
                   </span>
                 </span>
               </div>
-              <Timer seconds={secondsElapsed} />
+              <Timer
+                seconds={secondsElapsed}
+                isPaused={isTimerPaused}
+                onPause={togglePause}
+              />
             </div>
           </div>
 
@@ -196,6 +206,7 @@ const SudokuGame = () => {
                 selectedCell={selectedCell}
                 conflicts={conflicts}
                 onCellSelect={handleCellSelect}
+                showValues={!isTimerPaused}
               />
             </div>
             {/* Controls - Right Side */}

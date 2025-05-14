@@ -17,9 +17,9 @@ const App = () => {
         </div>
       </main>
 
-      <footer className="mt-auto bg-white border-t border-gray-200">
+      <footer className="mt-auto bg-yellow-600 border-t border-yellow-300">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-stone-50">
             © {new Date().getFullYear()} Sudoku Game.
           </p>
         </div>
