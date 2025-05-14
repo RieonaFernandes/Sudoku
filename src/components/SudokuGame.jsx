@@ -235,7 +235,7 @@ const SudokuGame = () => {
               </div>
             </div>
             {/* Controls - Right Side */}
-            <div className="flex flex-col items-center lg:w-80 gap-6">
+            <div className="flex flex-col items-center lg:w-80 py-3 gap-6">
               {/* Number input pad */}
               <div className="grid grid-cols-5 gap-2 w-full">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
