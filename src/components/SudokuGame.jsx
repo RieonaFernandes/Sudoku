@@ -65,13 +65,10 @@ const SudokuGame = () => {
 
   // Handle cell selection
   const handleCellSelect = (row, col) => {
-    console.log("789");
     if (!board[row][col].isFixed) {
-      console.log("101112");
       setSelectedCell((prev) =>
         prev?.row === row && prev?.col === col ? null : { row, col }
       );
-      console.log(selectedCell);
     }
   };
 
@@ -112,11 +109,8 @@ const SudokuGame = () => {
     cell.value = number;
     cell.notes = [];
 
-    console.log("999", number);
-
     // Only validate if number is not 0 (erase action)
     if (number !== 0) {
-      console.log("123");
       const isValid = isCellValid(newBoard, row, col);
       const newConflicts = isValid
         ? conflicts.filter((c) => !(c.row === row && c.col === col))
@@ -131,7 +125,6 @@ const SudokuGame = () => {
       }
       setConflicts(newConflicts);
     } else {
-      console.log("456");
       // When erasing, remove any existing conflict for this cell
       setConflicts(conflicts.filter((c) => !(c.row === row && c.col === col)));
     }

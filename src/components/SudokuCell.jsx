@@ -42,7 +42,7 @@ const SudokuCell = ({
             ? "text-amber-800 bg-amber-100 font-semibold cursor-default"
             : "text-amber-900 bg-white hover:bg-amber-200 cursor-pointer"
         }
-        ${isSelected ? "bg-amber-200 shadow-inner" : ""}
+        ${isSelected ? "ring-2 ring-amber-900 bg-amber-100 z-10" : ""}
         ${isConflict ? "text-red-500 bg-red-100" : ""}
         ${
           (row + 1) % 3 === 0 && row !== 8
