@@ -5,6 +5,7 @@ import GameWonModal from "./GameWonModal";
 import Timer from "./Timer";
 import StartModal from "./StartModal";
 import ConfirmationModal from "./ConfirmationModal";
+import GameOverModal from "./GameOverModal";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
@@ -22,7 +23,10 @@ const SudokuGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [cluesUsed, setCluesUsed] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
   const totalClues = 4;
+  const totalMistakes = 3;
 
   // Initialize game on mount and difficulty change
   useEffect(() => {
@@ -53,6 +57,8 @@ const SudokuGame = () => {
     setIsTimerRunning(true);
     setGameStarted(true);
     setCluesUsed(0);
+    setMistakes(0);
+    setGameOver(false);
   };
 
   // Handle cell selection
@@ -66,7 +72,11 @@ const SudokuGame = () => {
 
   // Handle number input from keyboard or number pad
   const handleNumberInput = (number) => {
-    if (!selectedCell || board[selectedCell.row][selectedCell.col].isFixed)
+    if (
+      !selectedCell ||
+      board[selectedCell.row][selectedCell.col].isFixed ||
+      gameOver
+    )
       return;
 
     // const newBoard = board.map((row) => [...row]);
@@ -81,6 +91,13 @@ const SudokuGame = () => {
     const newConflicts = isValid
       ? conflicts.filter((c) => !(c.row === row && c.col === col))
       : [...conflicts, { row, col }];
+    if (!isValid) {
+      setMistakes((prev) => prev + 1);
+    }
+    if (mistakes + 1 >= totalMistakes) {
+      setGameOver(true);
+      setIsTimerRunning(false);
+    }
 
     // Check if board is complete and valid
     const isComplete = newBoard.every((row) =>
@@ -157,8 +174,19 @@ const SudokuGame = () => {
                 {difficulty.toUpperCase()}
               </span>
             </div>
-            <Timer seconds={secondsElapsed} />
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-stone-100 px-3 py-1 rounded-lg">
+                <span className="text-stone-600 text-sm font-medium">
+                  Mistakes:{" "}
+                  <span className="text-stone-800">
+                    {mistakes}/{totalMistakes}
+                  </span>
+                </span>
+              </div>
+              <Timer seconds={secondsElapsed} />
+            </div>
           </div>
+
           {/* Main Content Area */}
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sudoku Board - Left Side */}
@@ -218,6 +246,16 @@ const SudokuGame = () => {
                 onCancel={() => setShowConfirmation(false)}
               />
             )}
+
+            {gameOver && (
+              <GameOverModal
+                onRestart={() => {
+                  setGameOver(false);
+                  initializeGame(difficulty);
+                }}
+              />
+            )}
+
             {gameWon && (
               <GameWonModal
                 onClose={() => setGameWon(false)}
