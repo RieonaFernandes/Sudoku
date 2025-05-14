@@ -106,11 +106,12 @@ export const generateNewPuzzle = (difficulty = "medium") => {
   const puzzle = removeNumbers(solvedGrid, difficulty);
 
   return puzzle.map((row, rowIndex) =>
-    row.map((value, colIndex) => ({
-      value,
-      isFixed: value !== 0,
-      row: rowIndex,
-      col: colIndex,
+    row.map((cell, colIndex) => ({
+      value: cell,
+      isFixed: cell !== 0,
+      // row: rowIndex,
+      // col: colIndex,
+      solution: solvedGrid[rowIndex][colIndex],
     }))
   );
 };

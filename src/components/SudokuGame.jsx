@@ -21,6 +21,8 @@ const SudokuGame = () => {
   const [showStartModal, setShowStartModal] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [cluesUsed, setCluesUsed] = useState(0);
+  const totalClues = 4;
 
   // Initialize game on mount and difficulty change
   useEffect(() => {
@@ -50,6 +52,7 @@ const SudokuGame = () => {
     // setDifficulty(selectedDifficulty);
     setIsTimerRunning(true);
     setGameStarted(true);
+    setCluesUsed(0);
   };
 
   // Handle cell selection
@@ -110,6 +113,23 @@ const SudokuGame = () => {
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [selectedCell]);
+
+  const handleClue = () => {
+    if (!selectedCell || cluesUsed >= totalClues) return;
+
+    const newBoard = cloneBoard(board);
+    const { row, col } = selectedCell;
+
+    const correctValue = newBoard[row][col].solution;
+
+    newBoard[row][col].value = correctValue;
+
+    setBoard(newBoard);
+    setCluesUsed((prev) => prev + 1);
+    setConflicts((prev) =>
+      prev.filter((c) => !(c.row === row && c.col === col))
+    );
+  };
 
   return (
     <div className="min-h-screen py-15 pb-4 sm:pb-8 flex items-start justify-center">
@@ -179,9 +199,14 @@ const SudokuGame = () => {
               </div>
 
               {/* Game Controls */}
-              <GameControls
+              {/* <GameControls
                 onNewGame={() => setShowConfirmation(true)}
                 className="w-full"
+              /> */}
+              <GameControls
+                onNewGame={() => setShowConfirmation(true)}
+                onClue={handleClue}
+                cluesLeft={totalClues - cluesUsed}
               />
             </div>
             {/* Add confirmation modal rendering */}
