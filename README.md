@@ -2,14 +2,15 @@
 <pre>
   <div align="center">
 
-███████╗██╗   ██╗██████╗   ██████╗ ██╗   ██ ██╗   ██╗
-██╔════╝██║   ██║██║   ██║██╔═══██╗██╔══██╗ ██║   ██║
-███████╗██║   ██║██║   ██║██║   ██║█████║   ██║   ██║
-╚════██║██║   ██║██║   ██║██║   ██║██╔═ ██╗ ██║   ██║
-███████║╚██████╔╝██████╔╝ ╚██████╔╝██║   ██║╚██████╔╝
-╚══════╝ ╚═════╝ ╚═════╝   ╚═════╝ ╚═╝   ╚═╝ ╚═════╝
-</div>
----------------------------------------------------
+███████╗██╗ ██╗██████╗ ██████╗ ██╗ ██ ██╗ ██╗
+██╔════╝██║ ██║██║ ██║██╔═══██╗██╔══██╗ ██║ ██║
+███████╗██║ ██║██║ ██║██║ ██║█████║ ██║ ██║
+╚════██║██║ ██║██║ ██║██║ ██║██╔═ ██╗ ██║ ██║
+███████║╚██████╔╝██████╔╝ ╚██████╔╝██║ ██║╚██████╔╝
+╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═╝ ╚═╝ ╚═════╝
+
+## </div>
+
 <br/>
 </pre>
 </div>
@@ -21,17 +22,27 @@
 ## Installation
 
 Navigate to the project folder and install the dependencies.
+
 ```sh
 npm install
 ```
 
 ## Run Application
+
 To run the application, execute:
+
 ```sh
 npm run dev
 ```
 
+## Link to the hosted Web page
+
+```sh
+https://rieonafernandes.github.io/Sudoku/
+```
+
 ## Functionality
+
 <ul>
 <li><b>Landing Page</b></li>
   You can select the difficulty level of the game and the select start.
@@ -51,5 +62,3 @@ If you finish the grid cirrectly you get a Game won message and an option to pla
 
 <li><b>Game Over</b></li>
 If you make three mistakes then you will receive "Game over" message and an option to play again.
-
-
