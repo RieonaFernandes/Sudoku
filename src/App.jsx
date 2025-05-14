@@ -20,7 +20,7 @@ const App = () => {
       <footer className="mt-auto py-4 bg-yellow-600/60 border-t border-yellow-300">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-stone-50">
-            © {new Date().getFullYear()} Sudoku Game.
+            © {new Date().getFullYear()} Sudoku Game
           </p>
           <p className="text-center text-sm text-stone-50">
             Designed by & Coded by Rieona Fernandes

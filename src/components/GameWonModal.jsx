@@ -54,10 +54,10 @@ const GameWonModal = ({ onClose, onNewGame }) => {
             <GiCelebrationFire className="text-yellow-500" />
           </div>
           <h2 className="text-2xl font-semibold text-stone-800 mb-4">
-            Perfect Grid!
+            Waffle Master!
           </h2>
           <p className="text-stone-600 mb-6">
-            You've cooked up a flawless waffle puzzle!
+            Every square in place, this batch is baked to perfection.
           </p>
 
           <div className="flex flex-col gap-4">
@@ -67,7 +67,7 @@ const GameWonModal = ({ onClose, onNewGame }) => {
                        hover:bg-yellow-500/60 transition-colors font-medium
                        w-full focus:outline-none focus:ring-2 focus:ring-stone-400"
             >
-              New Waffle Grid
+              Mix a New Batch
             </button>
             <button
               onClick={onClose}
@@ -75,7 +75,7 @@ const GameWonModal = ({ onClose, onNewGame }) => {
                        hover:bg-yellow-500/60 transition-colors font-medium
                        w-full focus:outline-none focus:ring-2 focus:ring-stone-400"
             >
-              Keep Savoring
+              Admire Your Waffle
             </button>
           </div>
         </div>

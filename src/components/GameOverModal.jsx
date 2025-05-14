@@ -10,11 +10,10 @@ const GameOverModal = ({ onRestart }) => {
             <GiWildfires className="text-orange-600" />
           </div>
           <h2 className="text-2xl font-semibold text-stone-800 mb-4">
-            Grid Burned!
+            Oops! Burnt the batter.
           </h2>
           <p className="text-stone-600 mb-6">
-            Too many incorrect numbers! The waffle grid couldn't handle the
-            heat.
+            The grid couldn't take the heat. Let's try a fresh mix.
           </p>
           <button
             onClick={onRestart}
@@ -22,7 +21,7 @@ const GameOverModal = ({ onRestart }) => {
                      hover:bg-yellow-500/60 transition-colors font-medium
                      w-full focus:outline-none focus:ring-2 focus:ring-stone-400"
           >
-            Start Fresh Grid
+            Take Another Crack at It
           </button>
         </div>
       </div>

@@ -7,10 +7,10 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
         <div className="text-center">
           <div className="mb-4 text-2xl">🧇</div>
           <h3 className="text-xl font-semibold text-stone-800 mb-3">
-            Start New Game?
+            Start a new waffle?
           </h3>
           <p className="text-stone-600 mb-6">
-            Your current progress will be lost.
+            Your current stack will be flipped out.
           </p>
           <div className="flex gap-3 justify-center">
             <button
@@ -19,7 +19,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
                        hover:bg-yellow-500/60 transition-colors
                        focus:outline-none focus:ring-2 focus:ring-stone-400"
             >
-              Confirm
+              Yup, Flip It
             </button>
             <button
               onClick={onCancel}
@@ -27,7 +27,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
                        hover:bg-yellow-500/60  transition-colors
                        focus:outline-none focus:ring-2 focus:ring-stone-400"
             >
-              Cancel
+              Wait, I'm Still Cooking
             </button>
           </div>
         </div>

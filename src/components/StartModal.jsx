@@ -25,7 +25,7 @@ const StartModal = ({ onStart }) => {
 
           <div className="mb-8 space-y-4">
             <p className="text-stone-600 text-sm font-medium">
-              Difficulty Level
+              Let's Get Griddling!
             </p>
             <DifficultySelector
               difficulty={difficulty}
@@ -34,6 +34,10 @@ const StartModal = ({ onStart }) => {
             />
           </div>
 
+          <p className="text-stone-600 mb-6">
+            The waffle iron is hot. Are your skills crispy?
+          </p>
+
           <button
             onClick={() => onStart(difficulty)}
             className="w-full py-3.5 bg-yellow-500 text-stone-50 rounded-xl
@@ -41,7 +45,7 @@ const StartModal = ({ onStart }) => {
                      focus:outline-none focus:ring-2 focus:ring-stone-500
                      font-medium tracking-wide"
           >
-            Start Baking 🧇
+            Pour the Grid! 🧇
           </button>
         </div>
       </div>
