@@ -4,7 +4,7 @@ import { GiWildfires } from "react-icons/gi";
 const GameOverModal = ({ onRestart }) => {
   return (
     <div className="fixed inset-0 bg-stone-900/30 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-      <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle animate-soft-pop">
+      <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle-active animate-pop-in">
         <div className="text-center">
           <div className="flex items-center justify-center text-4xl mb-4">
             <GiWildfires className="text-orange-600" />

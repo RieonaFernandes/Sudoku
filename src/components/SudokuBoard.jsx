@@ -13,7 +13,7 @@ const SudokuBoard = ({
   };
 
   return (
-    <div className="max-w-lg w-full mx-auto bg-amber-50 p-2 rounded-xl shadow-waffle">
+    <div className="max-w-lg w-full mx-auto bg-amber-50 p-2 rounded-xl">
       <div className="grid grid-cols-9 gap-0 bg-amber-200">
         {board.map((row, rowIdx) =>
           row.map((cell, colIdx) => {
@@ -32,6 +32,7 @@ const SudokuBoard = ({
                 row={rowIdx}
                 col={colIdx}
                 showValue={showValues}
+                notes={cell.notes || []}
               />
             );
           })

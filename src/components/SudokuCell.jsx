@@ -11,6 +11,7 @@ const SudokuCell = ({
   row,
   col,
   showValue,
+  notes = [],
 }) => {
   // Handle keyboard accessibility
   useEffect(() => {
@@ -38,10 +39,10 @@ const SudokuCell = ({
         ${className}
         ${
           isFixed
-            ? "text-amber-800 bg-amber-50 font-semibold cursor-default"
-            : "text-amber-900 bg-white hover:bg-amber-100 cursor-pointer"
+            ? "text-amber-800 bg-amber-100 font-semibold cursor-default"
+            : "text-amber-900 bg-white hover:bg-amber-200 cursor-pointer"
         }
-        ${isSelected ? "bg-amber-100 shadow-inner" : ""}
+        ${isSelected ? "bg-amber-200 shadow-inner" : ""}
         ${isConflict ? "text-red-500 bg-red-100" : ""}
         ${
           (row + 1) % 3 === 0 && row !== 8
@@ -62,9 +63,24 @@ const SudokuCell = ({
       }${isFixed ? ", fixed value" : ""}`}
       disabled={isFixed || !showValue}
     >
-      {/* {value !== 0 ? value : ""} */}
-      {/* {showValue ? (value !== 0 ? value : "") : ""} */}
-      {showValue ? (value !== 0 ? value : "") : "?"}
+      {showValue ? (
+        value !== 0 ? (
+          <span className="text-lg">{value}</span>
+        ) : (
+          <div className="grid grid-cols-3 gap-0 w-full h-full p-[1px]">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <div
+                key={num}
+                className="text-[8px] flex items-center justify-center"
+              >
+                {notes.includes(num) ? num : ""}
+              </div>
+            ))}
+          </div>
+        )
+      ) : (
+        "?"
+      )}
     </button>
   );
 };
@@ -79,6 +95,11 @@ SudokuCell.propTypes = {
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
   showValue: PropTypes.bool,
+  notes: PropTypes.arrayOf(PropTypes.number),
+};
+
+SudokuCell.defaultProps = {
+  notes: [],
 };
 
 export default SudokuCell;

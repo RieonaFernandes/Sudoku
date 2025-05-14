@@ -26,6 +26,7 @@ const SudokuGame = () => {
   const [mistakes, setMistakes] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isTimerPaused, setIsTimerPaused] = useState(false);
+  const [isPencilMode, setIsPencilMode] = useState(false);
   const totalClues = 4;
   const totalMistakes = 3;
 
@@ -84,8 +85,29 @@ const SudokuGame = () => {
     const newBoard = cloneBoard(board);
     const { row, col } = selectedCell;
 
+    //pencil marks
+    const cell = newBoard[row][col];
+
+    if (isPencilMode) {
+      if (number === 0) {
+        cell.notes = [];
+      } else {
+        const index = cell.notes.indexOf(number);
+        if (index === -1) {
+          cell.notes = [...cell.notes, number].sort((a, b) => a - b);
+        } else {
+          cell.notes = cell.notes.filter((n) => n !== number);
+        }
+      }
+      setBoard(newBoard);
+      return;
+    }
+
     // Update cell value
     newBoard[row][col].value = number;
+
+    cell.value = number;
+    cell.notes = [];
 
     // Check validity
     const isValid = isCellValid(newBoard, row, col);
@@ -141,6 +163,7 @@ const SudokuGame = () => {
     const correctValue = newBoard[row][col].solution;
 
     newBoard[row][col].value = correctValue;
+    newBoard[row][col].notes = [];
 
     setBoard(newBoard);
     setCluesUsed((prev) => prev + 1);
@@ -167,7 +190,7 @@ const SudokuGame = () => {
       )}
 
       {gameStarted && (
-        <div className="max-w-6xl w-full bg-white rounded-2xl p-6 shadow-waffle">
+        <div className="max-w-6xl w-full bg-white rounded-2xl p-6">
           {/* Header Section */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
@@ -181,14 +204,6 @@ const SudokuGame = () => {
               </span>
             </div>
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-stone-100 px-3 py-1 rounded-lg">
-                <span className="text-stone-600 text-sm font-medium">
-                  Mistakes:{" "}
-                  <span className="text-stone-800">
-                    {mistakes}/{totalMistakes}
-                  </span>
-                </span>
-              </div>
               <Timer
                 seconds={secondsElapsed}
                 isPaused={isTimerPaused}
@@ -208,6 +223,16 @@ const SudokuGame = () => {
                 onCellSelect={handleCellSelect}
                 showValues={!isTimerPaused}
               />
+              <div className="flex items-center justify-center gap-4 py-2">
+                <div className="bg-amber-50 px-3 py-1 rounded-lg border border-amber-200">
+                  <span className="text-amber-900 text-sm font-medium">
+                    Mistakes:{" "}
+                    <span className="text-amber-900">
+                      {mistakes}/{totalMistakes}
+                    </span>
+                  </span>
+                </div>
+              </div>
             </div>
             {/* Controls - Right Side */}
             <div className="flex flex-col items-center lg:w-80 gap-6">
@@ -217,7 +242,7 @@ const SudokuGame = () => {
                   <button
                     key={num}
                     onClick={() => handleNumberInput(num)}
-                    className="aspect-square bg-amber-50 rounded-lg hover:bg-amber-100 
+                    className="aspect-square bg-amber-50 rounded-lg hover:bg-amber-100 shadow-md
                             transition-colors font-medium text-amber-900
                             border border-amber-200 hover:border-amber-300
                             focus:outline-none focus:ring-2 focus:ring-amber-400"
@@ -246,6 +271,8 @@ const SudokuGame = () => {
                 onNewGame={() => setShowConfirmation(true)}
                 onClue={handleClue}
                 cluesLeft={totalClues - cluesUsed}
+                onTogglePencil={() => setIsPencilMode(!isPencilMode)}
+                isPencilMode={isPencilMode}
               />
             </div>
             {/* Add confirmation modal rendering */}

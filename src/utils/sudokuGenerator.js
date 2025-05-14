@@ -112,6 +112,7 @@ export const generateNewPuzzle = (difficulty = "medium") => {
       // row: rowIndex,
       // col: colIndex,
       solution: solvedGrid[rowIndex][colIndex],
+      notes: [],
     }))
   );
 };

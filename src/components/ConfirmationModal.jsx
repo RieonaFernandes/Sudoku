@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ConfirmationModal = ({ onConfirm, onCancel }) => {
   return (
     <div className="fixed inset-0 bg-stone-900/30 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-      <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle animate-pop-in">
+      <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle-active animate-pop-in">
         <div className="text-center">
           <div className="mb-4 text-2xl">🧇</div>
           <h3 className="text-xl font-semibold text-stone-800 mb-3">

@@ -8,7 +8,7 @@ const StartModal = ({ onStart }) => {
 
   return (
     <div className="fixed inset-0 bg-stone-900/30 flex items-center justify-center p-4 z-50 backdrop-blur-md">
-      <div className="bg-stone-50 rounded-3xl p-8 max-w-md w-full shadow-waffle animate-soft-pop">
+      <div className="bg-stone-50 rounded-3xl p-8 max-w-md w-full shadow-waffle-active animate-pop-in">
         <div className="text-center">
           <div className="py-4 flex flex-col items-center justify-center">
             <img
