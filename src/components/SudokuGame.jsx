@@ -65,10 +65,13 @@ const SudokuGame = () => {
 
   // Handle cell selection
   const handleCellSelect = (row, col) => {
+    console.log("789");
     if (!board[row][col].isFixed) {
+      console.log("101112");
       setSelectedCell((prev) =>
         prev?.row === row && prev?.col === col ? null : { row, col }
       );
+      console.log(selectedCell);
     }
   };
 
@@ -109,17 +112,28 @@ const SudokuGame = () => {
     cell.value = number;
     cell.notes = [];
 
-    // Check validity
-    const isValid = isCellValid(newBoard, row, col);
-    const newConflicts = isValid
-      ? conflicts.filter((c) => !(c.row === row && c.col === col))
-      : [...conflicts, { row, col }];
-    if (!isValid) {
-      setMistakes((prev) => prev + 1);
-    }
-    if (mistakes + 1 >= totalMistakes) {
-      setGameOver(true);
-      setIsTimerRunning(false);
+    console.log("999", number);
+
+    // Only validate if number is not 0 (erase action)
+    if (number !== 0) {
+      console.log("123");
+      const isValid = isCellValid(newBoard, row, col);
+      const newConflicts = isValid
+        ? conflicts.filter((c) => !(c.row === row && c.col === col))
+        : [...conflicts, { row, col }];
+      if (!isValid) {
+        setMistakes((prev) => prev + 1);
+      }
+      // Check game over after state update
+      if (mistakes + 1 >= totalMistakes) {
+        setGameOver(true);
+        setIsTimerRunning(false);
+      }
+      setConflicts(newConflicts);
+    } else {
+      console.log("456");
+      // When erasing, remove any existing conflict for this cell
+      setConflicts(conflicts.filter((c) => !(c.row === row && c.col === col)));
     }
 
     // Check if board is complete and valid
@@ -128,8 +142,6 @@ const SudokuGame = () => {
     );
 
     setBoard(newBoard);
-
-    setConflicts(newConflicts);
 
     if (isComplete && validateSolution(newBoard)) {
       setGameWon(true);
@@ -252,7 +264,10 @@ const SudokuGame = () => {
                 ))}
 
                 <button
-                  onClick={() => handleNumberInput(0)}
+                  onClick={() => {
+                    handleNumberInput(0);
+                    setSelectedCell(null);
+                  }}
                   className="col-span-1 bg-amber-50 rounded-lg hover:bg-amber-100
                         flex items-center justify-center border border-amber-200
                         hover:border-amber-300 transition-colors"
