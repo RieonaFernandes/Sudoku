@@ -14,8 +14,6 @@ const SudokuBoard = ({
 
   return (
     <div className="relative max-w-lg w-full mx-auto p-2 sm:p-4 rounded-3xl">
-      {/* <div className="relative max-w-lg w-full mx-auto p-4 bg-amber-50 rounded-3xl shadow-waffle-active"> */}
-      {/* Grid Image Background */}
       <div className="relative aspect-square">
         <img
           src={grid}
@@ -59,7 +57,6 @@ const SudokuBoard = ({
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { GiWildfires } from "react-icons/gi";
 import gameOver from "../../public/gameOver.gif";
 
 const GameOverModal = ({ onRestart }) => {
@@ -7,9 +6,6 @@ const GameOverModal = ({ onRestart }) => {
     <div className="fixed inset-0 bg-stone-900/30 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
       <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle-active animate-pop-in">
         <div className="text-center">
-          {/* <div className="flex items-center justify-center text-4xl mb-4">
-            <GiWildfires className="text-orange-600" />
-          </div> */}
           <div className="py-4 flex flex-col items-center justify-center">
             <img
               src={gameOver}

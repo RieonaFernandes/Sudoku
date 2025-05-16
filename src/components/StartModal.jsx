@@ -18,11 +18,6 @@ const StartModal = ({ onStart }) => {
             />
           </div>
 
-          {/* <h2 className="text-2xl font-semibold text-stone-800 mb-2">
-            Waffle Grid
-          </h2>
-          <p className="text-stone-500 text-sm mb-6">Number Puzzle Game</p> */}
-
           <div className="mb-8 space-y-4">
             <p className="text-stone-600 text-sm font-medium">
               Let's Get Griddling!
@@ -45,7 +40,7 @@ const StartModal = ({ onStart }) => {
                      focus:outline-none focus:ring-2 focus:ring-stone-500
                      font-medium tracking-wide"
           >
-            Pour the Grid! 🧇
+            Pour the Grid!
           </button>
         </div>
       </div>

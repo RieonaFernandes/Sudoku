@@ -5,7 +5,6 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
     {
       id: "easy",
       label: "Easy",
-      // emoji: "🌸",
       colorClasses: {
         selected: "bg-yellow-500 text-stone-50 ring-2 ring-stone-200",
         unselected: "text-yellow-500 hover:bg-yellow-500/80",
@@ -14,7 +13,6 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
     {
       id: "medium",
       label: "Medium",
-      // emoji: "🌾",
       colorClasses: {
         selected: "bg-yellow-500 text-stone-50 ring-2 ring-stone-200",
         unselected: "text-yellow-500 hover:bg-yellow-500/80",
@@ -23,7 +21,6 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
     {
       id: "hard",
       label: "Hard",
-      // emoji: "🔥",
       colorClasses: {
         selected: "bg-yellow-500 text-stone-50 ring-2 ring-stone-200",
         unselected: "text-stone-500 hover:bg-yellow-500/80",
@@ -36,7 +33,6 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
       {difficulties.map(({ id, label, emoji, colorClasses }) => (
         <div key={id} className="relative">
           <button
-            // key={id}
             onClick={() => setDifficulty(id)}
             className={`
               px-4 py-2.5 rounded-xl transition-all duration-300
@@ -52,7 +48,6 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
               ${difficulty === id ? "shadow-sm" : "shadow-xs"}
             `}
           >
-            {/* <span className="text-lg mr-2 opacity-80">{emoji}</span> */}
             <span
               className={`font-medium ${
                 difficulty === id ? "text-stone-50" : "text-stone-700"

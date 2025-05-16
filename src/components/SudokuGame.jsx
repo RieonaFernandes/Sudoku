@@ -55,7 +55,6 @@ const SudokuGame = () => {
     setConflicts([]);
     setGameWon(false);
     setSecondsElapsed(0);
-    // setDifficulty(selectedDifficulty);
     setIsTimerRunning(true);
     setGameStarted(true);
     setCluesUsed(0);
@@ -272,10 +271,6 @@ const SudokuGame = () => {
               </div>
 
               {/* Game Controls */}
-              {/* <GameControls
-                onNewGame={() => setShowConfirmation(true)}
-                className="w-full"
-              /> */}
               <GameControls
                 onNewGame={() => setShowConfirmation(true)}
                 onClue={handleClue}

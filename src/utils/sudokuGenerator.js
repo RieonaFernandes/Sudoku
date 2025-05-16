@@ -109,8 +109,6 @@ export const generateNewPuzzle = (difficulty = "medium") => {
     row.map((cell, colIndex) => ({
       value: cell,
       isFixed: cell !== 0,
-      // row: rowIndex,
-      // col: colIndex,
       solution: solvedGrid[rowIndex][colIndex],
       notes: [],
     }))

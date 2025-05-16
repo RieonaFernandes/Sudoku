@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { LuPencilLine, LuPencilOff } from "react-icons/lu";
 
-// const GameControls = ({ onNewGame, onCheckSolution }) => {
 const GameControls = ({
   onNewGame,
   onClue,
