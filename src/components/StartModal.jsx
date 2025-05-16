@@ -14,7 +14,7 @@ const StartModal = ({ onStart }) => {
             <img
               src={title}
               alt="title"
-              className="w-30 sm:w-32 md:w-34 lg:w-36 h-24 sm:h-26 md:h-28 lg:h-30"
+              className="w-30 sm:w-32 md:w-34 lg:w-36 h-26 sm:h-28 md:h-30 lg:h-32"
             />
           </div>
 

@@ -33,20 +33,23 @@ const SudokuCell = ({
   return (
     <button
       className={`
-        aspect-square flex items-center justify-center 
-        text-lg font-medium transition-colors rounded-md
-        ${className || ""}
-        ${
-          isFixed
-            ? "text-orange-800 bg-amber-200/80 font-semibold cursor-default"
-            : "text-orange-900 hover:bg-amber-100/60 cursor-pointer"
-        }
-        ${isSelected ? "ring-2 ring-amber-900 bg-amber-100/60 z-10" : ""}
-        ${isConflict ? "text-red-500 bg-red-100" : ""}
-        
-        focus:ring-2 focus:ring-amber-400 
-        ${!showValue ? "bg-stone-100 text-transparent" : ""}
-      `}
+          aspect-square flex items-center justify-center 
+          text-base sm:text-lg font-medium transition-colors rounded-sm sm:rounded-lg
+          ${className || ""}
+          ${
+            isFixed
+              ? "text-orange-800 bg-amber-200/80 font-semibold cursor-default"
+              : "text-orange-900 hover:bg-amber-100/60 cursor-pointer"
+          }
+          ${
+            isSelected
+              ? "ring-1 sm:ring-2 ring-amber-900 bg-amber-100/60 z-10"
+              : ""
+          }
+          ${isConflict ? "text-red-500 bg-red-100" : ""}
+          focus:ring-2 focus:ring-amber-400 
+          ${!showValue ? "bg-stone-100 text-transparent" : ""}
+        `}
       onClick={() => !isFixed && onClick()}
       aria-label={`Cell at row ${row + 1}, column ${col + 1}. ${
         value || "empty"
@@ -55,13 +58,13 @@ const SudokuCell = ({
     >
       {showValue ? (
         value !== 0 ? (
-          <span className="text-lg">{value}</span>
+          <span className="text-base sm:text-lg">{value}</span>
         ) : (
-          <div className="grid grid-cols-3 gap-0 w-full h-full p-[1px]">
+          <div className="grid grid-cols-3 gap-0 w-full h-full p-[0.5px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <div
                 key={num}
-                className="text-[8px] flex items-center justify-center"
+                className="text-[6px] xs:text-[7px] sm:text-[8px] flex items-center justify-center"
               >
                 {notes.includes(num) ? num : ""}
               </div>

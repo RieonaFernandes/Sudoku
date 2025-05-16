@@ -218,19 +218,12 @@ const SudokuGame = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-4">
             {/* Sudoku Board - Left Side */}
             <div className="flex-1">
-              <SudokuBoard
-                board={board}
-                selectedCell={selectedCell}
-                conflicts={conflicts}
-                onCellSelect={handleCellSelect}
-                showValues={!isTimerPaused}
-              />
-              <div className="flex items-center justify-center gap-4 py-2">
-                <div className="bg-amber-50 px-3 py-1 rounded-lg border border-amber-200">
-                  <span className="text-amber-900 text-sm font-medium">
+              <div className="px-[10%] -mb-[5%]">
+                <div className="bg-amber-50 px-3 px-2 py-0.5 rounded-md border border-amber-200 inline-block">
+                  <span className="text-amber-900 text-xs font-medium">
                     Mistakes:{" "}
                     <span className="text-amber-900">
                       {mistakes}/{totalMistakes}
@@ -238,9 +231,17 @@ const SudokuGame = () => {
                   </span>
                 </div>
               </div>
+
+              <SudokuBoard
+                board={board}
+                selectedCell={selectedCell}
+                conflicts={conflicts}
+                onCellSelect={handleCellSelect}
+                showValues={!isTimerPaused}
+              />
             </div>
             {/* Controls - Right Side */}
-            <div className="flex flex-col items-center lg:w-80 py-3 gap-6">
+            <div className="flex flex-col items-center lg:w-80 py-3 gap-6 -mt-[6%] sm:mt-[6%]">
               {/* Number input pad */}
               <div className="grid grid-cols-5 gap-2 w-full">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (

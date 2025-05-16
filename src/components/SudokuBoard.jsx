@@ -13,7 +13,7 @@ const SudokuBoard = ({
   };
 
   return (
-    <div className="relative max-w-lg w-full mx-auto rounded-3xl">
+    <div className="relative max-w-lg w-full mx-auto p-2 sm:p-4 rounded-3xl">
       {/* <div className="relative max-w-lg w-full mx-auto p-4 bg-amber-50 rounded-3xl shadow-waffle-active"> */}
       {/* Grid Image Background */}
       <div className="relative aspect-square">
@@ -25,7 +25,7 @@ const SudokuBoard = ({
       </div>
 
       {/* Interactive Cells Overlay */}
-      <div className="absolute top-12 left-11 right-15 bottom-17.5 z-10">
+      <div className="absolute top-[11.5%] left-[10.5%] right-[14%] bottom-[15.5%] sm:top-[12%] sm:left-[11%] sm:right-[14%] sm:bottom-[16%]">
         <div className="grid grid-cols-9 grid-rows-9 h-full w-full">
           {board.map((row, rowIdx) =>
             row.map((cell, colIdx) => {
@@ -36,7 +36,7 @@ const SudokuBoard = ({
               return (
                 <div
                   key={`${rowIdx}-${colIdx}`}
-                  className="flex items-center justify-center p-[4px]"
+                  className="flex items-center justify-center p-[4px] sm:p-[4px]"
                 >
                   <SudokuCell
                     value={cell.value}

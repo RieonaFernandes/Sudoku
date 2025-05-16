@@ -8,7 +8,7 @@ const App = () => {
         <img
           src={title}
           alt="title"
-          className="w-30 sm:w-32 md:w-34 lg:w-36 h-20 sm:h-22 md:h-24 lg:h-26"
+          className="w-30 sm:w-32 md:w-34 lg:w-36 h-26 sm:h-30 md:h-32 lg:h-34"
         />
       </div>
       <main className="mx-auto">
