@@ -34,26 +34,16 @@ const SudokuCell = ({
     <button
       className={`
         aspect-square flex items-center justify-center 
-        text-lg font-medium transition-colors
-        border border-amber-200 focus:outline-none
-        ${className}
+        text-lg font-medium transition-colors rounded-md
+        ${className || ""}
         ${
           isFixed
-            ? "text-amber-800 bg-amber-100 font-semibold cursor-default"
-            : "text-amber-900 bg-white hover:bg-amber-200 cursor-pointer"
+            ? "text-orange-800 bg-amber-200/80 font-semibold cursor-default"
+            : "text-orange-900 hover:bg-amber-100/60 cursor-pointer"
         }
-        ${isSelected ? "ring-2 ring-amber-900 bg-amber-100 z-10" : ""}
+        ${isSelected ? "ring-2 ring-amber-900 bg-amber-100/60 z-10" : ""}
         ${isConflict ? "text-red-500 bg-red-100" : ""}
-        ${
-          (row + 1) % 3 === 0 && row !== 8
-            ? "border-b-2 border-amber-300"
-            : "border-b border-amber-200"
-        }
-        ${
-          (col + 1) % 3 === 0 && col !== 8
-            ? "border-r-2 border-amber-300"
-            : "border-r border-amber-200"
-        }
+        
         focus:ring-2 focus:ring-amber-400 
         ${!showValue ? "bg-stone-100 text-transparent" : ""}
       `}
