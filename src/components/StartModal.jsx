@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import DifficultySelector from "./DifficultySelector";
-import title from "../../public/title.png";
+import title from "../../public/hello.gif";
 
 const StartModal = ({ onStart }) => {
   const [difficulty, setDifficulty] = useState("medium");
@@ -14,7 +14,7 @@ const StartModal = ({ onStart }) => {
             <img
               src={title}
               alt="title"
-              className="w-30 sm:w-32 md:w-34 lg:w-36 h-20 sm:h-22 md:h-24 lg:h-26"
+              className="w-30 sm:w-32 md:w-34 lg:w-36 h-24 sm:h-26 md:h-28 lg:h-30"
             />
           </div>
 
