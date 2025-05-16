@@ -10,6 +10,7 @@ import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
 import BackspaceIcon from "./icons/backspace";
+import { CiEraser } from "react-icons/ci";
 
 const SudokuGame = () => {
   const [board, setBoard] = useState([]);
@@ -242,7 +243,7 @@ const SudokuGame = () => {
             {/* Controls - Right Side */}
             <div className="flex flex-col items-center lg:w-80 py-3 gap-6 -mt-[6%] sm:mt-[6%]">
               {/* Number input pad */}
-              <div className="grid grid-cols-5 gap-2 w-full">
+              <div className="grid grid-cols-5 gap-2 w-[80%] lg:w-full">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                   <button
                     key={num}
@@ -250,7 +251,7 @@ const SudokuGame = () => {
                     className="aspect-square bg-amber-50 rounded-lg hover:bg-amber-100 shadow-md
                             transition-colors font-medium text-amber-900
                             border border-amber-200 hover:border-amber-300
-                            focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            focus:outline-none focus:ring-2 focus:ring-amber-400 text-md sm:text-2xl"
                   >
                     {num}
                   </button>
@@ -266,7 +267,7 @@ const SudokuGame = () => {
                         hover:border-amber-300 transition-colors"
                   aria-label="Clear cell"
                 >
-                  <BackspaceIcon className="w-5 h-5 text-amber-600" />
+                  <CiEraser className="w-7 h-7 text-amber-600" />
                 </button>
               </div>
 
