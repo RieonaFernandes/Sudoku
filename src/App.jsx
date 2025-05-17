@@ -9,6 +9,7 @@ const App = () => {
           src={title}
           alt="title"
           className="w-30 sm:w-32 md:w-34 lg:w-36 h-26 sm:h-30 md:h-32 lg:h-34"
+          loading="eager"
         />
       </div>
       <main className="mx-auto">

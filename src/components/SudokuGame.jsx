@@ -183,7 +183,7 @@ const SudokuGame = () => {
   };
 
   return (
-    <div className="min-h-screen py-15 pb-4 sm:pb-8 flex items-start justify-center">
+    <div className="min-h-screen px-5 sm:px-1 py-15 pb-4 sm:pb-8 flex items-start justify-center">
       {showStartModal && (
         <StartModal
           onStart={(selectedDifficulty) => {
@@ -195,7 +195,7 @@ const SudokuGame = () => {
       )}
 
       {gameStarted && (
-        <div className="max-w-6xl w-full bg-white rounded-2xl p-6">
+        <div className="max-w-6xl w-full rounded-2xl p-6 bg-amber-50">
           {/* Header Section */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">

@@ -11,6 +11,7 @@ const GameOverModal = ({ onRestart }) => {
               src={gameOver}
               alt="gameOver"
               className="w-30 sm:w-32 md:w-34 lg:w-36 h-24 sm:h-26 md:h-28 lg:h-30"
+              loading="eager"
             />
           </div>
           <h2 className="text-2xl font-semibold text-stone-800 mb-4">

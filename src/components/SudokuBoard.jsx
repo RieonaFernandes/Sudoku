@@ -19,6 +19,7 @@ const SudokuBoard = ({
           src={grid}
           alt="sudoku grid"
           className="w-full h-full object-contain"
+          loading="eager"
         />
       </div>
 
