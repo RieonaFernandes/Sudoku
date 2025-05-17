@@ -74,9 +74,10 @@ const createFilledGrid = () => {
 const removeNumbers = (grid, difficulty) => {
   const puzzle = grid.map((row) => [...row]);
   const difficultySettings = {
-    easy: 35, // ~35 cells remaining
-    medium: 28, // ~28 cells remaining
-    hard: 22, // ~22 cells remaining
+    easy: 35, // ~35 cells
+    medium: 28, // ~28 cells
+    hard: 20, // ~20 cells
+    expert: 12, // ~12 cells
   };
 
   const cellsToRemove = 81 - difficultySettings[difficulty];
