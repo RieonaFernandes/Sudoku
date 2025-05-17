@@ -1,10 +1,18 @@
 import PropTypes from "prop-types";
 import gameWon from "../../public/gameWon.gif";
+import confetti from "canvas-confetti";
 
 const GameWonModal = ({ onClose, onNewGame }) => {
+  confetti({
+    particleCount: 300,
+    spread: 130,
+    origin: { y: 0.6 },
+    colors: ["#FFD700", "#FFA500", "#FF8C00", "#FF6347"],
+  });
   return (
     <div className="fixed inset-0 bg-stone-900/30 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
       {/* <div className="bg-stone-50 rounded-2xl p-8 max-w-md w-full shadow-waffle-active animate-pop-in"> */}
+
       <div
         className="text-center relative overflow-hidden space-y-2 xs:space-y-3 sm:space-y-4 bg-amber-50 p-1.5 
       xs:p-2 sm:p-4 md:p-5 lg:p-6 rounded-3xl border-2 border-amber-300 shadow-[0_5px_15px_rgba(251,191,36,0.3)] 
