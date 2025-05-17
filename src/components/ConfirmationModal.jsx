@@ -9,7 +9,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
         <div className="absolute top-0 right-0 w-12 md:w-16 lg:w-20 h-12 md:h-16 lg:h-20 bg-amber-100 rounded-bl-[100%]"></div>
         <div className="absolute -bottom-2 sm:-bottom-4 left-0 w-12 md:w-16 lg:w-20 h-12 md:h-16 lg:h-20 bg-amber-100 rounded-tr-[100%]"></div>
 
-        <div className="text-center">
+        <div className="text-center mb-4">
           <div className="flex flex-col items-center justify-center mb-4 text-xl">
             <img
               src={newGame}
