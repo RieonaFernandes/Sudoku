@@ -204,8 +204,8 @@ const SudokuGame = () => {
                   <div key={i} className="bg-amber-100 rounded-sm" />
                 ))}
               </div>
-              <span className="text-sm font-medium text-amber-600">
-                {difficulty.toUpperCase()}
+              <span className="text-sm font-medium text-amber-600 Agbalumo-regular capitalize">
+                {difficulty}
               </span>
             </div>
             <div className="flex items-center gap-4 mb-4">
@@ -223,7 +223,7 @@ const SudokuGame = () => {
             <div className="flex-1">
               <div className="px-[10%] -mb-[5%]">
                 <div className="bg-amber-50 px-3 px-2 py-0.5 rounded-md border border-amber-200 inline-block">
-                  <span className="text-amber-900 text-xs font-medium">
+                  <span className="text-amber-900 text-xs font-medium Agbalumo-regular">
                     Mistakes:{" "}
                     <span className="text-amber-900">
                       {mistakes}/{totalMistakes}

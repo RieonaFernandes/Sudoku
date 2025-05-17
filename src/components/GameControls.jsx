@@ -61,7 +61,8 @@ const GameControls = ({
       <div className="flex justify-center gap-4 mt-6">
         <button
           onClick={onNewGame}
-          className="px-4 py-2 bg-yellow-500 text-stone-50 rounded-lg shadow-md hover:bg-yellow-500/60 transition-colors border border-amber-500 focus:ring-2 focus:ring-amber-500 "
+          className="px-4 py-2 bg-yellow-500 text-stone-50 rounded-lg shadow-md hover:bg-yellow-500/60 transition-colors border 
+          border-amber-500 focus:ring-2 focus:ring-amber-500 Agbalumo-regular bg-gradient-to-r from-amber-500 to-amber-600"
         >
           Cook a Fresh Waffle
         </button>
