@@ -7,9 +7,17 @@ const SudokuBoard = ({
   onCellSelect,
   conflicts,
   showValues,
+  highlightedNumbers,
 }) => {
   const hasConflict = (row, col) => {
     return conflicts.some((coord) => coord.row === row && coord.col === col);
+  };
+
+  // highlight check
+  const isHighlighted = (row, col) => {
+    return highlightedNumbers.some(
+      (coord) => coord.row === row && coord.col === col
+    );
   };
 
   return (
@@ -31,6 +39,7 @@ const SudokuBoard = ({
               const isSelected =
                 selectedCell?.row === rowIdx && selectedCell?.col === colIdx;
               const isConflict = hasConflict(rowIdx, colIdx);
+              const isHighlight = isHighlighted(rowIdx, colIdx);
 
               return (
                 <div
@@ -50,6 +59,7 @@ const SudokuBoard = ({
                     showValue={showValues}
                     notes={cell.notes || []}
                     className="w-full h-full"
+                    isHighlighted={isHighlight}
                   />
                 </div>
               );

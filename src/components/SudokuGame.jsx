@@ -28,6 +28,7 @@ const SudokuGame = () => {
   const [gameOver, setGameOver] = useState(false);
   const [isTimerPaused, setIsTimerPaused] = useState(false);
   const [isPencilMode, setIsPencilMode] = useState(false);
+  const [highlightedNumbers, setHighlightedNumbers] = useState([]);
   const totalClues = 4;
   const totalMistakes = 3;
 
@@ -65,10 +66,40 @@ const SudokuGame = () => {
 
   // Handle cell selection
   const handleCellSelect = (row, col) => {
+    // if (!board[row][col].isFixed) {
+    //   setSelectedCell((prev) =>
+    //     prev?.row === row && prev?.col === col ? null : { row, col }
+    //   );
+    // }
+
     if (!board[row][col].isFixed) {
-      setSelectedCell((prev) =>
-        prev?.row === row && prev?.col === col ? null : { row, col }
-      );
+      setSelectedCell((prev) => {
+        const newSelected =
+          prev?.row === row && prev?.col === col ? null : { row, col };
+
+        // Update highlights when selection changes
+        if (newSelected) {
+          const selectedValue = board[newSelected.row][newSelected.col].value;
+          const highlights =
+            selectedValue !== 0
+              ? board.flatMap((r, rIdx) =>
+                  r
+                    .map((cell, cIdx) =>
+                      cell.value === selectedValue &&
+                      !(rIdx === row && cIdx === col)
+                        ? { row: rIdx, col: cIdx }
+                        : null
+                    )
+                    .filter(Boolean)
+                )
+              : [];
+          setHighlightedNumbers(highlights);
+        } else {
+          setHighlightedNumbers([]);
+        }
+
+        return newSelected;
+      });
     }
   };
 
@@ -195,6 +226,27 @@ const SudokuGame = () => {
     return counts;
   }, [board]);
 
+  useEffect(() => {
+    if (selectedCell) {
+      const { row, col } = selectedCell;
+      const selectedValue = board[row][col].value;
+      const highlights =
+        selectedValue !== 0
+          ? board.flatMap((r, rIdx) =>
+              r
+                .map((cell, cIdx) =>
+                  cell.value === selectedValue &&
+                  !(rIdx === row && cIdx === col)
+                    ? { row: rIdx, col: cIdx }
+                    : null
+                )
+                .filter(Boolean)
+            )
+          : [];
+      setHighlightedNumbers(highlights);
+    }
+  }, [board, selectedCell]);
+
   return (
     <div className="min-h-screen px-5 sm:px-1 py-15 pb-4 sm:pb-8 flex items-start justify-center">
       {showStartModal && (
@@ -251,6 +303,7 @@ const SudokuGame = () => {
                 conflicts={conflicts}
                 onCellSelect={handleCellSelect}
                 showValues={!isTimerPaused}
+                highlightedNumbers={highlightedNumbers}
               />
             </div>
             {/* Controls - Right Side */}
