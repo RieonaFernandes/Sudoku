@@ -96,7 +96,13 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
               : "max-h-0 opacity-0 mt-0"
           }`}
           >
-            <p className="text-[6px] xs:text-[7px] sm:text-[10px] text-amber-700 leading-tight px-0.5 Agbalumo-regular">
+            <p
+              className={`mt-0.5 xs:mt-1 text-[6px] xs:text-[8px] sm:text-[10px] font-bold text-amber-600 transition-all Agbalumo-regular capitalize
+          ${difficulty === diff.name ? "scale-110" : ""}`}
+            >
+              {diff.name}
+            </p>
+            <p className="text-[6px] xs:text-[7px] sm:text-[10px] text-amber-600 leading-tight px-0.5 Agbalumo-regular">
               {diff.description}
             </p>
           </div>
