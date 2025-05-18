@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import SudokuBoard from "./SudokuBoard";
 import GameControls from "./GameControls";
 import GameWonModal from "./GameWonModal";
@@ -9,8 +9,8 @@ import GameOverModal from "./GameOverModal";
 import { generateNewPuzzle } from "../utils/sudokuGenerator";
 import { validateSolution, isCellValid } from "../utils/validation";
 import { cloneBoard } from "../utils/helpers";
-import BackspaceIcon from "./icons/backspace";
 import { CiEraser } from "react-icons/ci";
+import { BsUiChecksGrid } from "react-icons/bs";
 
 const SudokuGame = () => {
   const [board, setBoard] = useState([]);
@@ -182,6 +182,19 @@ const SudokuGame = () => {
     setSelectedCell(null);
   };
 
+  //Track Correctly Placed Numbers
+  const numberCounts = useMemo(() => {
+    const counts = new Array(10).fill(0);
+    board.forEach((row) => {
+      row.forEach((cell) => {
+        if (cell.value !== 0 && cell.value === cell.solution) {
+          counts[cell.value]++;
+        }
+      });
+    });
+    return counts;
+  }, [board]);
+
   return (
     <div className="min-h-screen px-5 sm:px-1 py-15 pb-4 sm:pb-8 flex items-start justify-center">
       {showStartModal && (
@@ -244,7 +257,7 @@ const SudokuGame = () => {
             <div className="flex flex-col items-center lg:w-80 py-3 gap-6 -mt-[6%] sm:mt-[6%]">
               {/* Number input pad */}
               <div className="grid grid-cols-5 gap-2 w-[80%] lg:w-full">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                   <button
                     key={num}
                     onClick={() => handleNumberInput(num)}
@@ -255,6 +268,29 @@ const SudokuGame = () => {
                   >
                     {num}
                   </button>
+                ))} */}
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                  <button
+                    key={num}
+                    onClick={() => handleNumberInput(num)}
+                    disabled={numberCounts[num] >= 9}
+                    className={`aspect-square rounded-lg shadow-md transition-colors font-medium text-amber-900 border
+                              relative
+                              ${
+                                numberCounts[num] >= 9
+                                  ? "bg-amber-50 border-amber-300 cursor-not-allowed"
+                                  : "bg-amber-200 border-amber-300 hover:border-amber-300 hover:bg-amber-100"
+                              }
+                              focus:outline-none focus:ring-2 focus:ring-amber-400 text-md sm:text-2xl`}
+                  >
+                    {numberCounts[num] < 9 && num}
+                    {numberCounts[num] >= 9 && (
+                      <BsUiChecksGrid
+                        className="absolute inset-2 w-[80%] h-[80%] text-amber-400 opacity-75 pointer-events-none"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
                 ))}
 
                 <button
@@ -262,12 +298,12 @@ const SudokuGame = () => {
                     handleNumberInput(0);
                     setSelectedCell(null);
                   }}
-                  className="col-span-1 bg-amber-50 rounded-lg hover:bg-amber-100
-                        flex items-center justify-center border border-amber-200
-                        hover:border-amber-300 transition-colors"
+                  className="col-span-1 bg-amber-200 rounded-lg hover:bg-amber-100
+                        flex items-center justify-center border border-amber-300
+                        hover:border-amber-400 transition-colors"
                   aria-label="Clear cell"
                 >
-                  <CiEraser className="w-7 h-7 text-amber-600" />
+                  <CiEraser className="w-8 h-8 text-amber-700" />
                 </button>
               </div>
 
