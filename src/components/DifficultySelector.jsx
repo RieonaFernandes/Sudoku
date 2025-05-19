@@ -29,7 +29,7 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
       id: "hard",
       name: "hard",
       label: "Crispy",
-      description: "Crunchy! For experts.",
+      description: "Crunchy! For the skilled.",
       border: "border-amber-500",
       imageSrc: hardLevel,
       imageAlt: "Crispy waffle",
@@ -51,7 +51,7 @@ const DifficultySelector = ({ difficulty, setDifficulty, className }) => {
         <button
           key={diff.name}
           onClick={() => setDifficulty(diff.name)}
-          className={`group flex flex-col items-center transition-all duration-300 relative
+          className={`group flex flex-col items-center transition-all duration-300 relative cursor-pointer
           ${difficulty === diff.name ? "scale-105" : "hover:scale-102"}`}
         >
           {/* Main content */}

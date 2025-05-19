@@ -332,7 +332,7 @@ const SudokuGame = () => {
                               ${
                                 numberCounts[num] >= 9
                                   ? "bg-amber-50 border-amber-300 cursor-not-allowed"
-                                  : "bg-amber-200 border-amber-300 hover:border-amber-300 hover:bg-amber-100"
+                                  : "bg-amber-200 border-amber-300 hover:border-amber-300 hover:bg-amber-100 cursor-pointer"
                               }
                               focus:outline-none focus:ring-2 focus:ring-amber-400 text-md sm:text-2xl`}
                   >
@@ -353,7 +353,7 @@ const SudokuGame = () => {
                   }}
                   className="col-span-1 bg-amber-200 rounded-lg hover:bg-amber-100
                         flex items-center justify-center border border-amber-300
-                        hover:border-amber-400 transition-colors"
+                        hover:border-amber-400 transition-colors cursor-pointer"
                   aria-label="Clear cell"
                 >
                   <CiEraser className="w-8 h-8 text-amber-700" />

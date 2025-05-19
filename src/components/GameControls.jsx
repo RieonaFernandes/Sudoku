@@ -27,7 +27,7 @@ const GameControls = ({
             disabled={cluesLeft === 0}
             className={`relative px-2 py-3 rounded-lg transition-colors flex flex-col gap-1 border border-amber-500 shadow-md focus:ring-2 focus:ring-amber-500 ${
               cluesLeft > 0
-                ? "bg-yellow-500 text-stone-50 hover:bg-yellow-500/60"
+                ? "bg-yellow-500 text-stone-50 hover:bg-yellow-500/60 cursor-pointer"
                 : "bg-yellow-500/50 text-stone-50 cursor-not-allowed"
             }`}
           >
@@ -59,7 +59,7 @@ const GameControls = ({
               e.stopPropagation();
               setShowClueInfo(true);
             }}
-            className="absolute bottom-1 right-1 text-amber-700 hover:text-amber-600"
+            className="absolute bottom-1 right-1 text-amber-700 hover:text-amber-600 cursor-pointer"
           >
             <HiOutlineInformationCircle className="text-sm md:text-md" />
           </button>
@@ -85,11 +85,13 @@ const GameControls = ({
         <div className="relative inline-block">
           <button
             onClick={onTogglePencil}
-            className={`relative px-3 py-3 rounded-lg transition-colors flex flex-col gap-1 border border-amber-500 shadow-md focus:ring-2 focus:ring-amber-500 hover:bg-yellow-500/60 ${
-              isPencilMode
-                ? "bg-yellow-500/60 text-stone-50 "
-                : "bg-yellow-500 text-stone-50"
-            }`}
+            className={`relative px-3 py-3 rounded-lg transition-colors flex flex-col gap-1 border border-amber-500 shadow-md focus:ring-2 focus:ring-amber-500 hover:bg-yellow-500/60 
+              cursor-pointer
+              ${
+                isPencilMode
+                  ? "bg-yellow-500/60 text-stone-50 "
+                  : "bg-yellow-500 text-stone-50"
+              }`}
           >
             <div className="flex items-center p-2">
               <span className="text-sm font-medium text-amber-600">
@@ -116,7 +118,7 @@ const GameControls = ({
               e.stopPropagation();
               setShowPencilInfo(true);
             }}
-            className="absolute bottom-1 right-1 text-amber-700 hover:text-amber-600"
+            className="absolute bottom-1 right-1 text-amber-700 hover:text-amber-600 cursor-pointer"
           >
             <HiOutlineInformationCircle className="text-sm md:text-md" />
           </button>
@@ -141,8 +143,11 @@ const GameControls = ({
       <div className="flex justify-center gap-4 mt-6">
         <button
           onClick={onNewGame}
-          className="px-4 py-2 bg-yellow-500 text-stone-50 rounded-lg shadow-md hover:bg-yellow-500/60 transition-colors border 
-          border-amber-500 focus:ring-2 focus:ring-amber-500 Agbalumo-regular bg-gradient-to-r from-amber-500 to-amber-600"
+          className="px-4 py-2 bg-yellow-500 text-stone-50 rounded-xl shadow-lg hover:bg-yellow-500/60 transition-colors border-2 
+          border-amber-400 focus:ring-2 focus:ring-amber-500 Agbalumo-regular bg-gradient-to-r from-amber-500 to-amber-600
+          cursor-pointer        
+          hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+          hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
         >
           Cook a Fresh Waffle
         </button>

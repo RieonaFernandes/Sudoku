@@ -60,16 +60,22 @@ const GameWonModal = ({ onClose, onNewGame, time }) => {
               className="px-6 py-3 bg-yellow-500 text-stone-50 rounded-2xl shadow-md
                        hover:from-amber-600 hover:to-amber-700 transition-colors font-medium Agbalumo-regular
                        w-full border border-2 border-amber-300 focus:ring-2 focus:ring-amber-300
-                     bg-gradient-to-r from-amber-500 to-amber-600"
+                     ` bg-gradient-to-r from-amber-500 to-amber-600
+                       cursor-pointer        
+                       hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+                       hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
             >
               Mix a New Batch
             </button>
             <button
               onClick={onClose}
               className="px-6 py-3 bg-yellow-500 text-stone-50 rounded-2xl Agbalumo-regular 
-                       hover:from-amber-600 hover:to-amber-700 transition-colors font-medium shadow-md
+                       hover:from-amber-600 hover:to-amber-700 transition-colors font-medium shadow-lg
                        w-full border border-2 border-amber-300 focus:ring-2 focus:ring-amber-300
-                     bg-gradient-to-r from-amber-500 to-amber-600"
+                       bg-gradient-to-r from-amber-500 to-amber-600
+                       cursor-pointer        
+                       hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+                       hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
             >
               Admire Your Waffle
             </button>

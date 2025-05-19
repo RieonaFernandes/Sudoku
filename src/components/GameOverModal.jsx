@@ -10,6 +10,9 @@ const GameOverModal = ({ onRestart }) => {
       xs:p-2 sm:p-4 md:p-5 lg:p-6 rounded-3xl border-2 border-amber-300 shadow-[0_5px_15px_rgba(251,191,36,0.3)] 
       max-w-md w-full shadow-waffle-active animate-pop-in"
       >
+        <div className="absolute top-0 right-0 w-12 md:w-16 lg:w-20 h-12 md:h-16 lg:h-20 bg-amber-100 rounded-bl-[100%]"></div>
+        <div className="absolute -bottom-2 sm:-bottom-4 left-0 w-12 md:w-16 lg:w-20 h-12 md:h-16 lg:h-20 bg-amber-100 rounded-tr-[100%]"></div>
+
         <div className="text-center mb-8">
           <div className="py-4 flex flex-col items-center justify-center">
             <img
@@ -27,10 +30,13 @@ const GameOverModal = ({ onRestart }) => {
           </p>
           <button
             onClick={onRestart}
-            className="px-6 py-3 bg-yellow-500 text-stone-50 rounded-lg Agbalumo-regular 
+            className="px-6 py-3 bg-yellow-500 text-stone-50 rounded-xl Agbalumo-regular 
                      hover:from-amber-600 hover:to-amber-700 transition-colors shadow-md
                      border border-2 border-amber-300 focus:ring-2 focus:ring-amber-300
-                     bg-gradient-to-r from-amber-500 to-amber-600"
+                     bg-gradient-to-r from-amber-500 to-amber-600
+                     cursor-pointer        
+                     hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+                     hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
           >
             Take Another Crack at It
           </button>

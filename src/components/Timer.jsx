@@ -15,7 +15,7 @@ const Timer = ({ seconds, isPaused, onPause }) => {
       onClick={onPause}
       className="flex items-center gap-2 px-3 py-1.5 bg-amber-200 rounded-lg 
                hover:bg-amber-200/60 transition-colors group focus:outline-none
-               focus:ring-2 focus:ring-amber-500 shadow-md border border-amber-500"
+               focus:ring-2 focus:ring-amber-500 shadow-md border border-amber-500 cursor-pointer"
     >
       <FaStopwatch className="text-amber-700" />
       <span className="text-sm font-medium text-amber-700">

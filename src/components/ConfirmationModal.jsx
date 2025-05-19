@@ -27,10 +27,13 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
           <div className="flex gap-3 justify-center">
             <button
               onClick={onConfirm}
-              className="px-5 py-2 bg-yellow-500 text-stone-50 rounded-lg shadow-md
+              className="px-5 py-2 bg-yellow-500 text-stone-50 rounded-xl shadow-md
                        hover:from-amber-600 hover:to-amber-700 transition-colors Agbalumo-regular
                        border border-2 border-amber-300 focus:ring-2 focus:ring-amber-300
-                       bg-gradient-to-r from-amber-500 to-amber-600"
+                       bg-gradient-to-r from-amber-500 to-amber-600
+                       cursor-pointer        
+                       hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+                       hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
             >
               Yup, Flip It
             </button>
@@ -39,7 +42,10 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
               className="px-5 py-2 bg-yellow-500 text-stone-50 rounded-lg Agbalumo-regular
               hover:from-amber-600 hover:to-amber-700 transition-colors shadow-md
               border border-2 border-amber-300 focus:ring-2 focus:ring-amber-300
-              bg-gradient-to-r from-amber-500 to-amber-600"
+              bg-gradient-to-r from-amber-500 to-amber-600
+              cursor-pointer        
+              hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 
+              hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
             >
               Wait, I'm Still Cooking
             </button>

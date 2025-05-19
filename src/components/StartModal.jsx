@@ -42,11 +42,15 @@ const StartModal = ({ onStart }) => {
             onClick={() => onStart(difficulty)}
             disabled={!difficulty}
             className={`w-full py-2 sm:py-2.5 md:py-3 lg:py-4 text-[10px] sm:text-sm md:text-base lg:text-lg font-bold text-white
-              bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700
+              bg-gradient-to-r from-amber-500 to-amber-600 
               rounded-[8px] sm:rounded-[15px] md:rounded-[20px] border border-2 border-amber-400 transition-all duration-300
-              shadow-[0_2px_0_rgba(217,119,6,1)] sm:shadow-[0_3px_0_rgba(217,119,6,1)] md:shadow-[0_4px_0_rgba(217,119,6,1)] hover:shadow-[0_2px_0_rgba(217,119,6,1)]
-              hover:translate-y-[1px] xs:hover:translate-y-[2px] active:translate-y-[2px] xs:active:translate-y-[4px] active:shadow-none Agbalumo-regular
-              ${!difficulty ? "opacity-70" : " animate-slower-bounce "}`}
+              shadow-[0_2px_0_rgba(217,119,6,1)] sm:shadow-[0_3px_0_rgba(217,119,6,1)] md:shadow-[0_4px_0_rgba(217,119,6,1)]
+              active:translate-y-[2px] xs:active:translate-y-[4px] active:shadow-none Agbalumo-regular
+              ${
+                !difficulty
+                  ? "opacity-70"
+                  : "animate-slower-bounce cursor-pointer hover:translate-y-[1px] xs:hover:translate-y-[2px] hover:from-amber-600 hover:to-amber-700 hover:shadow-[0_2px_0_rgba(217,119,6,1)]"
+              }`}
           >
             {difficulty ? "START COOKING!" : "Pick a Waffle First!"}
           </button>
