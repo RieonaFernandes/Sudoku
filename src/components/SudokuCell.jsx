@@ -13,6 +13,7 @@ const SudokuCell = ({
   showValue,
   notes = [],
   isHighlighted,
+  isAreaHighlighted,
 }) => {
   // Handle keyboard accessibility
   useEffect(() => {
@@ -51,8 +52,8 @@ const SudokuCell = ({
           focus:ring-2 focus:ring-amber-400 
           ${!showValue ? "bg-stone-100 text-transparent" : ""}
 
-           ${isHighlighted ? "bg-blue-50/60" : ""}
-
+          ${isHighlighted ? "bg-indigo-200/60" : ""}
+          ${isAreaHighlighted ? "bg-gray-100/60" : ""}
         `}
       onClick={() => !isFixed && onClick()}
       aria-label={`Cell at row ${row + 1}, column ${col + 1}. ${

@@ -29,6 +29,7 @@ const SudokuGame = () => {
   const [isTimerPaused, setIsTimerPaused] = useState(false);
   const [isPencilMode, setIsPencilMode] = useState(false);
   const [highlightedNumbers, setHighlightedNumbers] = useState([]);
+  const [highlightedAreas, setHighlightedAreas] = useState([]);
   const totalClues = 4;
   const totalMistakes = 3;
 
@@ -77,26 +78,59 @@ const SudokuGame = () => {
         const newSelected =
           prev?.row === row && prev?.col === col ? null : { row, col };
 
+        let newHighlightedAreas = [];
+        let newHighlightedNumbers = [];
+
         // Update highlights when selection changes
         if (newSelected) {
-          const selectedValue = board[newSelected.row][newSelected.col].value;
-          const highlights =
+          // Calculate row, column, and subgrid cells
+          const { row: selRow, col: selCol } = newSelected;
+          const startRow = Math.floor(selRow / 3) * 3;
+          const startCol = Math.floor(selCol / 3) * 3;
+
+          // Generate all cells in row, column, and subgrid
+          const rowCells = Array.from({ length: 9 }, (_, c) => ({
+            row: selRow,
+            col: c,
+          }));
+          const colCells = Array.from({ length: 9 }, (_, r) => ({
+            row: r,
+            col: selCol,
+          }));
+          const subgridCells = [];
+          for (let r = startRow; r < startRow + 3; r++) {
+            for (let c = startCol; c < startCol + 3; c++) {
+              subgridCells.push({ row: r, col: c });
+            }
+          }
+
+          // Combine and deduplicate
+          const allCells = [...rowCells, ...colCells, ...subgridCells];
+          const uniqueCells = Array.from(
+            new Set(allCells.map(JSON.stringify)),
+            (str) => JSON.parse(str)
+          );
+          newHighlightedAreas = uniqueCells;
+
+          // Calculate same-value highlights
+          const selectedValue = board[selRow][selCol].value;
+          newHighlightedNumbers =
             selectedValue !== 0
               ? board.flatMap((r, rIdx) =>
                   r
                     .map((cell, cIdx) =>
                       cell.value === selectedValue &&
-                      !(rIdx === row && cIdx === col)
+                      !(rIdx === selRow && cIdx === selCol)
                         ? { row: rIdx, col: cIdx }
                         : null
                     )
                     .filter(Boolean)
                 )
               : [];
-          setHighlightedNumbers(highlights);
-        } else {
-          setHighlightedNumbers([]);
         }
+        // Update highlight states
+        setHighlightedAreas(newHighlightedAreas);
+        setHighlightedNumbers(newHighlightedNumbers);
 
         return newSelected;
       });
@@ -304,6 +338,7 @@ const SudokuGame = () => {
                 onCellSelect={handleCellSelect}
                 showValues={!isTimerPaused}
                 highlightedNumbers={highlightedNumbers}
+                highlightedAreas={highlightedAreas}
               />
             </div>
             {/* Controls - Right Side */}

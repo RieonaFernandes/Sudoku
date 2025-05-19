@@ -45,7 +45,7 @@ const GameControls = ({
                     key={i}
                     className={`${
                       i < cluesLeft ? "bg-amber-100" : "bg-amber-600"
-                    } rounded-sm`}
+                    } rounded-xs`}
                   />
                 ))}
               </div>
@@ -76,7 +76,7 @@ const GameControls = ({
                   onClick={() => setShowClueInfo(false)}
                   className="text-amber-800 hover:text-amber-600"
                 >
-                  <HiX className="text-lg" />
+                  <HiX className="text-lg cursor-pointer" />
                 </button>
               </div>
             </div>
@@ -132,7 +132,7 @@ const GameControls = ({
                   onClick={() => setShowPencilInfo(false)}
                   className="text-amber-800 hover:text-amber-600"
                 >
-                  <HiX className="text-lg" />
+                  <HiX className="text-lg cursor-pointer" />
                 </button>
               </div>
             </div>
