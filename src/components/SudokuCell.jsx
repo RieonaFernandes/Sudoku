@@ -48,7 +48,8 @@ const SudokuCell = ({
               ? "ring-1 sm:ring-2 ring-amber-900 bg-amber-100/60 z-10"
               : ""
           }
-          ${isConflict ? "text-red-500 bg-red-100" : ""}
+          ${!isFixed && !isConflict ? "text-red-950" : ""}
+          ${isConflict ? "text-red-500 bg-red-200" : ""}
           focus:ring-2 focus:ring-amber-400 
           ${!showValue ? "bg-stone-100 text-transparent" : ""}
 
@@ -64,9 +65,7 @@ const SudokuCell = ({
       {showValue ? (
         value !== 0 ? (
           <span
-            className={`text-[12px] xs:text-md sm:text-lg Agbalumo-regular ${
-              !isFixed ? "text-red-950" : ""
-            }`}
+            className={`text-[12px] xs:text-md sm:text-lg Agbalumo-regular`}
           >
             {value}
           </span>
