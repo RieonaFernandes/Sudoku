@@ -365,7 +365,7 @@ const SudokuGame = () => {
                     onClick={() => handleNumberInput(num)}
                     disabled={numberCounts[num] >= 9}
                     className={`aspect-square rounded-lg shadow-md transition-colors font-medium text-amber-900 border
-                              relative
+                              relative Agbalumo-regular
                               ${
                                 numberCounts[num] >= 9
                                   ? "bg-amber-50 border-amber-300 cursor-not-allowed"

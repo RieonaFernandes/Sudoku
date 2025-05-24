@@ -52,7 +52,7 @@ const SudokuCell = ({
           focus:ring-2 focus:ring-amber-400 
           ${!showValue ? "bg-stone-100 text-transparent" : ""}
 
-          ${isHighlighted ? "bg-indigo-200/60" : ""}
+          ${isHighlighted ? "bg-indigo-200/70" : ""}
           ${isAreaHighlighted ? "bg-gray-100/60" : ""}
         `}
       onClick={() => !isFixed && onClick()}
@@ -63,13 +63,19 @@ const SudokuCell = ({
     >
       {showValue ? (
         value !== 0 ? (
-          <span className="text-base sm:text-lg">{value}</span>
+          <span
+            className={`text-[12px] xs:text-md sm:text-lg Agbalumo-regular ${
+              !isFixed ? "text-red-950" : ""
+            }`}
+          >
+            {value}
+          </span>
         ) : (
-          <div className="grid grid-cols-3 gap-0 w-full h-full p-[0.5px]">
+          <div className="grid grid-cols-3 gap-0 w-full h-full -p-[0.5px]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <div
                 key={num}
-                className="text-[6px] xs:text-[7px] sm:text-[8px] flex items-center justify-center"
+                className="text-[4.25px] xs:text-[5px] sm:text-[6px] md:text-[7px] flex items-center justify-center"
               >
                 {notes.includes(num) ? num : ""}
               </div>
