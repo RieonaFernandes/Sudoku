@@ -63,6 +63,8 @@ const SudokuGame = () => {
     setCluesUsed(0);
     setMistakes(0);
     setGameOver(false);
+    setHighlightedNumbers([]);
+    setHighlightedAreas([]);
   };
 
   // Handle cell selection
