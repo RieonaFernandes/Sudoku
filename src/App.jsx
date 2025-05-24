@@ -24,7 +24,7 @@ const App = () => {
             © {new Date().getFullYear()} Sudoku Game
           </p>
           <p className="text-center text-sm text-stone-50">
-            Designed by & Coded by Rieona Fernandes
+            Designed & Coded by Rieona Fernandes
           </p>
         </div>
       </footer>
