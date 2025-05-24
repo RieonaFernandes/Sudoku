@@ -1,14 +1,9 @@
 export const validateSolution = (board) => {
   // First check: All cells must be filled
-  for (let row of board) {
-    for (let cell of row) {
-      if (cell.value === 0) return false;
-    }
-  }
-
-  // Check rows, columns, and subgrids
-  return (
-    validateRows(board) && validateColumns(board) && validateSubgrids(board)
+  if (board.some((row) => row.some((cell) => cell.value === 0))) return false;
+  // Then verify against solution
+  return board.every((row, r) =>
+    row.every((cell, c) => cell.value === cell.solution)
   );
 };
 
@@ -46,6 +41,7 @@ const validateSubgrids = (board) => {
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           const num = board[startRow + i][startCol + j].value;
+          if (num === 0) continue;
           if (numbers.has(num)) return false;
           numbers.add(num);
         }
@@ -59,6 +55,9 @@ const validateSubgrids = (board) => {
 export const isCellValid = (board, row, col) => {
   const value = board[row][col].value;
   if (value === 0) return true;
+
+  // Check against solution first
+  if (value !== board[row][col].solution) return false;
 
   // Check row
   for (let c = 0; c < 9; c++) {
@@ -76,7 +75,7 @@ export const isCellValid = (board, row, col) => {
 
   for (let i = startRow; i < startRow + 3; i++) {
     for (let j = startCol; j < startCol + 3; j++) {
-      if (i !== row && j !== col && board[i][j].value === value) return false;
+      if ((i !== row || j !== col) && board[i][j].value === value) return false;
     }
   }
 

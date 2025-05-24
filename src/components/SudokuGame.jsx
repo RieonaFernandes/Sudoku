@@ -146,12 +146,12 @@ const SudokuGame = () => {
     )
       return;
 
-    // const newBoard = board.map((row) => [...row]);
     const newBoard = cloneBoard(board);
     const { row, col } = selectedCell;
 
     //pencil marks
     const cell = newBoard[row][col];
+    const solutionValue = cell.solution;
 
     if (isPencilMode) {
       if (number === 0) {
@@ -169,20 +169,22 @@ const SudokuGame = () => {
     }
 
     // Update cell value
-    newBoard[row][col].value = number;
-
     cell.value = number;
     cell.notes = [];
 
-    // Only validate if number is not 0 (erase action)
+    // Check both validity and solution match
+    const isValidPosition = isCellValid(newBoard, row, col);
+    const isCorrectValue = number === solutionValue;
+
     if (number !== 0) {
-      const isValid = isCellValid(newBoard, row, col);
-      const newConflicts = isValid
-        ? conflicts.filter((c) => !(c.row === row && c.col === col))
-        : [...conflicts, { row, col }];
-      if (!isValid) {
+      if (!isValidPosition || !isCorrectValue) {
         setMistakes((prev) => prev + 1);
       }
+
+      // Update conflicts
+      const newConflicts = isValidPosition
+        ? conflicts.filter((c) => !(c.row === row && c.col === col))
+        : [...conflicts, { row, col }];
       // Check game over after state update
       if (mistakes + 1 >= totalMistakes) {
         setGameOver(true);
@@ -195,15 +197,13 @@ const SudokuGame = () => {
     }
 
     // Check if board is complete and valid
-    const isComplete = newBoard.every((row) =>
-      row.every((cell) => cell.value !== 0)
-    );
-
+    const isComplete = newBoard.every((r) => r.every((c) => c.value !== 0));
     setBoard(newBoard);
 
-    if (isComplete && validateSolution(newBoard)) {
-      setGameWon(true);
-      setIsTimerRunning(false);
+    if (isComplete) {
+      const isFullyValid = validateSolution(newBoard);
+      setGameWon(isFullyValid);
+      setIsTimerRunning(!isFullyValid);
     }
   };
 
